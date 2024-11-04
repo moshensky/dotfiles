@@ -613,6 +613,7 @@ require('lazy').setup({
         --
 
         bashls = {},
+        biome = {},
 
         lua_ls = {
           -- cmd = {...},
