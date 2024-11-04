@@ -9,7 +9,7 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 # -- Link .config items
 
-cd ../config
+cd $DIR/../config
 config_files=$(ls -A)
 
 for file in $config_files; do
