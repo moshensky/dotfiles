@@ -6,19 +6,9 @@ echo "[setup] INFO: Setup started"
 set -eo pipefail
 
 # Set scripts full path to directory
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+scripts_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
-echo "[setup] INFO: setup.sh dir: $DIR"
-
-# # Include utils script
-# utils_script="$DIR/../../ops/scripts/utils.sh"
-# if [ -f $utils_script ]; then
-#   source $utils_script
-# else
-#   echo "$utils_script doesn't exist! You must provide proper path to utils script."
-#   exit 1
-# fi
-
+echo "[setup] INFO: setup.sh dir: $scripts_dir"
 
 # -- Instal Packages
 
@@ -29,7 +19,7 @@ echo "[setup] INFO: setup.sh dir: $DIR"
 #
 # TODO: impl Debian
 
-source $DIR/symlink.sh
+source $scripts_dir/symlink.sh
 
 
 echo "[setup] INFO: Setup finished"
