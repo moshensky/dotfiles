@@ -10,7 +10,7 @@ dotfiles_dir=$(dirname "$scripts_dir")
 
 # -- Link .config items
 
-cd $dotfiles_dir/config
+cd "$dotfiles_dir/config"
 config_files=$(ls -A)
 
 for file in $config_files; do
