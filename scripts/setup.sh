@@ -21,5 +21,4 @@ echo "[setup] INFO: setup.sh dir: $scripts_dir"
 
 source "$scripts_dir/symlink.sh"
 
-
 echo "[setup] INFO: Setup finished"
