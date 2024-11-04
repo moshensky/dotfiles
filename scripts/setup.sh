@@ -29,7 +29,7 @@ echo "[setup] INFO: setup.sh dir: $DIR"
 #
 # TODO: impl Debian
 
-# ~/dotfiles/symlink.sh
+$DIR/symlink.sh
 
 
 echo "[setup] INFO: Setup finished"
