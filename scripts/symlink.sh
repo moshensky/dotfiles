@@ -5,11 +5,12 @@
 set -eo pipefail
 
 # Set scripts full path to directory
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+scripts_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+dotfiles_dir=$(dirname "$scripts_dir")
 
 # -- Link .config items
 
-cd $DIR/../config
+cd $dotfiles_dir/config
 config_files=$(ls -A)
 
 for file in $config_files; do
@@ -17,5 +18,5 @@ for file in $config_files; do
 		rm -rf "${HOME:?}/.config/$file"
 	fi
 
-	ln -sf "$DIR/../config/$file" "$HOME/.config/$file"
+	ln -sf "$dotfiles_dir/config/$file" "$HOME/.config/$file"
 done
