@@ -14,8 +14,9 @@ return {
 
       -- Configure linters
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
-        bash = { 'shellcheck' },
+        markdown = { 'markdownlint', 'cspell' },
+        bash = { 'shellcheck', 'cspell' },
+        sh = { 'shellcheck', 'cspell' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,

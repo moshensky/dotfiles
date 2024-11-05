@@ -36,6 +36,7 @@ backup_and_link() {
 
 	# Check if the target exists and create a backup
 	if [ -e "$target" ] && [ ! -L "$target" ]; then
+		# shellcheck disable=SC2155
 		local backup="$root_dir/backup/${target_basename}_$(date +%Y%m%d%H%M%S)"
 		mv "$target" "$backup"
 		echo "    Backup of '$target' created at '$backup'"
