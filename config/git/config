@@ -1,0 +1,56 @@
+# set proper file type in nvim `:set filetype=gitconfig`
+[user]
+	name = Nikita Moshenskiy
+	email = nikita@moshensky.com# overrides for a specific folder
+
+; [includeIf "gitdir:~/code/company/"]
+;   path = ~/.gitconfig-work
+;
+; [includeIf "gitdir:~/code/company/"]
+;   email = nmo@work.com
+
+[init]
+	defaultBranch = main
+
+; [core]
+; 	excludesfile = ~/.gitignore_global
+; 	autocrlf = input
+; 	attributesfile = ~/.gitattributes
+;
+;
+; [pull]
+;   rebase = true
+;
+; [rebase]
+;   updateRefs = true
+;
+; [rerere]
+;   enabled = true
+;
+; [merge]
+;   tool = nvim
+;   conflictstyle = diff3
+;
+; [mergetool]
+;   prompt = false
+;   keepBackup = false
+;
+; [mergetool "nvim"]
+;   cmd = nvim -f -c \"DiffviewOpen\"
+;
+; [alias]
+;   mergetool = "!nvim -c DiffviewOpen"
+;   dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
+;
+; [interactive]
+;     diffFilter = delta --color-only
+; [delta]
+;     navigate = true
+;     light = false
+;     features = line-numbers decorations
+;     true-color = always
+; [diff]
+;     colorMoved = default
+;
+; [includeIf "gitdir:~/Projects/h1/"]
+;   path = ~/.gitconfig_h1

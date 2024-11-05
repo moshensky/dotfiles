@@ -43,6 +43,7 @@ backup_and_link() {
 
 	# Force-create the symlink
 	ln -sf "$source" "$target"
+	# Prevent recursion
 	rm -f "$source/$target_basename"
 	echo "    Symlink created: '$target' -> '$source'"
 }
