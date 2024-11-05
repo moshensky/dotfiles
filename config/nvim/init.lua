@@ -158,8 +158,8 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 -- Configure spell chck
-vim.opt.spelllang = 'en_us'
-vim.opt.spell = true
+-- vim.opt.spelllang = 'en_us'
+-- vim.opt.spell = true
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
