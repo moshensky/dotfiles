@@ -2,6 +2,7 @@ return { -- Collection of various small independent plugins/modules
   'echasnovski/mini.nvim',
   config = function()
     -- Configure sessions. Works in tandem with mini.starter
+    --
     require('mini.sessions').setup {
       autoread = false,
       directory = '~/.local/share/nvim/session', -- for global sessions
