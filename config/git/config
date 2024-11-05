@@ -20,7 +20,7 @@
 	autoSetupRemote = true
 
 [branch]
-  sort = -committerdate
+	sort = -committerdate
 
 [core]
 	editor = nvim
@@ -29,7 +29,7 @@
 ; 	attributesfile = ~/.gitattributes
 ;
 [pull]
-  rebase = true
+	rebase = true
 
 [rebase]
-  updateRefs = true
+	updateRefs = true
