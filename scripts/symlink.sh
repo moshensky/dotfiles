@@ -57,3 +57,10 @@ for config in $config_files; do
 done
 
 # -- Link dot-home-thingies
+#
+dot_home_files=$(ls -A "$root_dir/dot-home-thingies")
+
+for config in $dot_home_files; do
+	echo "[INFO] Symlink config: $config"
+	backup_and_link --source "$root_dir/dot-home-thingies/$config" --target "$HOME/$config"
+done
