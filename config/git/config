@@ -1,8 +1,9 @@
 # set proper file type in nvim `:set filetype=gitconfig`
 [user]
 	name = Nikita Moshenskiy
-	email = nikita@moshensky.com# overrides for a specific folder
+	email = nikita@moshensky.com
 
+# overrides for a specific folder
 ; [includeIf "gitdir:~/code/company/"]
 ;   path = ~/.gitconfig-work
 ;
