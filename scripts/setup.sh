@@ -10,7 +10,7 @@ scripts_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 echo "[setup] INFO: setup.sh dir: $scripts_dir"
 
-# -- Instal Packages
+# -- Install Packages
 
 # TODO: impl MacOS
 # if [[ "$(uname)" == "Darwin" ]]; then

@@ -5,6 +5,14 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
+
+      -- Change cspell severity to HINT
+      lint.linters.cspell = require('lint.util').wrap(lint.linters.cspell, function(diagnostic)
+        diagnostic.severity = vim.diagnostic.severity.HINT
+        return diagnostic
+      end)
+
+      -- Configure linters
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
         bash = { 'shellcheck' },
