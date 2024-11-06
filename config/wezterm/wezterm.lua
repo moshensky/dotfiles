@@ -36,4 +36,7 @@ config.window_decorations = "RESIZE"
 --config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 
+-- improve laggy feel
+config.max_fps = 120
+
 return config
