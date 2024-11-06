@@ -168,6 +168,7 @@ return {
         bashls = {},
         biome = {},
         ts_ls = {},
+        tailwindcss = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -211,6 +212,7 @@ return {
         'shfmt',
         'markdownlint',
         'cspell',
+        -- 'tailwindcss-language-server',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
