@@ -16,6 +16,8 @@ return {
   },
   opts = {
     filesystem = {
+      -- select currently active buffer file in the file tree viewer
+      -- follow_current_file = { enabled = true },
       window = {
         mappings = {
           ['\\'] = 'close_window',

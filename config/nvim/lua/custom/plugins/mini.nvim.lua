@@ -3,10 +3,27 @@ return { -- Collection of various small independent plugins/modules
   config = function()
     -- Configure sessions. Works in tandem with mini.starter
     --
+    --
+    local function close_neo_tree()
+      vim.cmd 'Neotree close'
+    end
+
+    local function open_neo_tree()
+      vim.cmd 'Neotree'
+    end
+
     require('mini.sessions').setup {
       autoread = false,
       directory = '~/.local/share/nvim/session', -- for global sessions
       file = '', -- disable local sessions
+      hooks = {
+        pre = {
+          write = close_neo_tree,
+        },
+        -- post = {
+        --   read = open_neo_tree,
+        -- },
+      },
     }
 
     local starter = require 'mini.starter'
