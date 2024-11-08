@@ -118,3 +118,6 @@ export NVM_DIR="$HOME/.nvm"
 
 export EDITOR=vi
 export VISUAL=vi
+
+# Set natural scrolling
+xinput set-prop "Kensington      Kensington Expert Mouse" "libinput Natural Scrolling Enabled" 1
