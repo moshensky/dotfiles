@@ -55,7 +55,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init("~/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "wezterm"
@@ -336,9 +336,9 @@ globalkeys = gears.table.join(
 	awful.key({ modkey, "Control" }, "l", function()
 		awful.tag.incncol(-1, nil, true)
 	end, { description = "decrease the number of columns", group = "layout" }),
-	awful.key({ modkey }, "space", function()
-		awful.layout.inc(1)
-	end, { description = "select next", group = "layout" }),
+	-- awful.key({ modkey }, "space", function()
+	-- 	awful.layout.inc(1)
+	-- end, { description = "select next", group = "layout" }),
 	awful.key({ modkey, "Shift" }, "space", function()
 		awful.layout.inc(-1)
 	end, { description = "select previous", group = "layout" }),
@@ -352,6 +352,9 @@ globalkeys = gears.table.join(
 	end, { description = "restore minimized", group = "client" }),
 
 	-- Prompt
+	awful.key({ modkey }, "space", function()
+		awful.spawn("xfce4-appfinder")
+	end, { description = "xfce4-appfinder", group = "launcher" }),
 	awful.key({ modkey }, "Return", function()
 		awful.screen.focused().mypromptbox:run()
 	end, { description = "run prompt", group = "launcher" }),
@@ -527,7 +530,7 @@ awful.rules.rules = {
 	},
 
 	-- Add titlebars to normal clients and dialogs
-	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = true } },
+	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.
 	-- { rule = { class = "Firefox" },
