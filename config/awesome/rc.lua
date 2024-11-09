@@ -8,6 +8,7 @@ local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
+local vicious = require("vicious")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
@@ -139,7 +140,33 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+local date_color = "#d791a8"
+local time_color = "#ffffff"
+local date_widget = wibox.widget.textclock("<span foreground='" .. date_color .. "'>%a %-d %b </span>", 60)
+local time_widget = wibox.widget.textclock("<span foreground='" .. time_color .. "'>%l:%M %p  </span>", 1)
+
+-- Date
+datewidget = wibox.widget.textbox()
+vicious.register(datewidget, vicious.widgets.date, "%b %d, %R")
+-- Memory
+memwidget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.mem)
+vicious.register(memwidget, vicious.widgets.mem, "$1 ($2MiB/$3MiB)", 13)
+-- Cpu
+cpuwidget = awful.widget.graph()
+cpuwidget:set_width(50)
+cpuwidget:set_background_color("#494B4F")
+cpuwidget:set_color({
+	type = "linear",
+	from = { 0, 0 },
+	to = { 50, 0 },
+	stops = {
+		{ 0, "#FF5656" },
+		{ 0.5, "#88A175" },
+		{ 1, "#AECF96" },
+	},
+})
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -254,9 +281,13 @@ awful.screen.connect_for_each_screen(function(s)
 		s.mytasklist, -- Middle widget
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
+			cpuwidget,
+			memwidget,
 			mykeyboardlayout,
 			wibox.widget.systray(),
-			mytextclock,
+			-- datewidget,
+			-- date_widget,
+			time_widget,
 			s.mylayoutbox,
 		},
 	})
@@ -286,9 +317,9 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "k", function()
 		awful.client.focus.byidx(-1)
 	end, { description = "focus previous by index", group = "client" }),
-	-- awful.key({ modkey }, "w", function()
-	-- 	mymainmenu:show()
-	-- end, { description = "show main menu", group = "awesome" }),
+	awful.key({ modkey }, "w", function()
+		mymainmenu:show()
+	end, { description = "show main menu", group = "awesome" }),
 
 	-- Layout manipulation
 	awful.key({ modkey, "Shift" }, "j", function()
@@ -336,9 +367,9 @@ globalkeys = gears.table.join(
 	awful.key({ modkey, "Control" }, "l", function()
 		awful.tag.incncol(-1, nil, true)
 	end, { description = "decrease the number of columns", group = "layout" }),
-	-- awful.key({ modkey }, "space", function()
-	-- 	awful.layout.inc(1)
-	-- end, { description = "select next", group = "layout" }),
+	awful.key({ modkey }, "space", function()
+		awful.layout.inc(1)
+	end, { description = "select next", group = "layout" }),
 	awful.key({ modkey, "Shift" }, "space", function()
 		awful.layout.inc(-1)
 	end, { description = "select previous", group = "layout" }),
@@ -352,9 +383,9 @@ globalkeys = gears.table.join(
 	end, { description = "restore minimized", group = "client" }),
 
 	-- Prompt
-	awful.key({ modkey }, "space", function()
-		awful.spawn("xfce4-appfinder")
-	end, { description = "xfce4-appfinder", group = "launcher" }),
+	-- awful.key({ modkey }, "space", function()
+	-- 	awful.spawn("xfce4-appfinder")
+	-- end, { description = "xfce4-appfinder", group = "launcher" }),
 	awful.key({ modkey }, "Return", function()
 		awful.screen.focused().mypromptbox:run()
 	end, { description = "run prompt", group = "launcher" }),
