@@ -72,19 +72,19 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-	awful.layout.suit.floating,
 	awful.layout.suit.tile,
-	awful.layout.suit.tile.left,
-	awful.layout.suit.tile.bottom,
-	awful.layout.suit.tile.top,
-	awful.layout.suit.fair,
-	awful.layout.suit.fair.horizontal,
-	awful.layout.suit.spiral,
-	awful.layout.suit.spiral.dwindle,
+	awful.layout.suit.floating,
+	-- awful.layout.suit.tile.left,
+	-- awful.layout.suit.tile.bottom,
+	-- awful.layout.suit.tile.top,
+	-- awful.layout.suit.fair,
+	-- awful.layout.suit.fair.horizontal,
+	-- awful.layout.suit.spiral,
+	-- awful.layout.suit.spiral.dwindle,
 	awful.layout.suit.max,
 	awful.layout.suit.max.fullscreen,
-	awful.layout.suit.magnifier,
-	awful.layout.suit.corner.nw,
+	-- awful.layout.suit.magnifier,
+	-- awful.layout.suit.corner.nw,
 	-- awful.layout.suit.corner.ne,
 	-- awful.layout.suit.corner.sw,
 	-- awful.layout.suit.corner.se,
@@ -367,9 +367,9 @@ globalkeys = gears.table.join(
 	awful.key({ modkey, "Control" }, "l", function()
 		awful.tag.incncol(-1, nil, true)
 	end, { description = "decrease the number of columns", group = "layout" }),
-	awful.key({ modkey }, "space", function()
-		awful.layout.inc(1)
-	end, { description = "select next", group = "layout" }),
+	-- awful.key({ modkey }, "space", function()
+	-- 	awful.layout.inc(1)
+	-- end, { description = "select next", group = "layout" }),
 	awful.key({ modkey, "Shift" }, "space", function()
 		awful.layout.inc(-1)
 	end, { description = "select previous", group = "layout" }),
@@ -383,9 +383,9 @@ globalkeys = gears.table.join(
 	end, { description = "restore minimized", group = "client" }),
 
 	-- Prompt
-	-- awful.key({ modkey }, "space", function()
-	-- 	awful.spawn("xfce4-appfinder")
-	-- end, { description = "xfce4-appfinder", group = "launcher" }),
+	awful.key({ modkey }, "space", function()
+		awful.spawn("xfce4-appfinder")
+	end, { description = "xfce4-appfinder", group = "launcher" }),
 	awful.key({ modkey }, "Return", function()
 		awful.screen.focused().mypromptbox:run()
 	end, { description = "run prompt", group = "launcher" }),
@@ -521,7 +521,7 @@ awful.rules.rules = {
 			keys = clientkeys,
 			buttons = clientbuttons,
 			screen = awful.screen.preferred,
-			placement = awful.placement.centered, -- + awful.placement.no_overlap + awful.placement.no_offscreen,
+			placement = awful.placement.no_overlap + awful.placement.no_offscreen,
 		},
 	},
 
@@ -544,7 +544,6 @@ awful.rules.rules = {
 				"Wpa_gui",
 				"veromix",
 				"xtightvncviewer",
-				"xfce4-appfinder",
 			},
 
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -563,6 +562,24 @@ awful.rules.rules = {
 
 	-- Add titlebars to normal clients and dialogs
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = true } },
+
+	{
+		rule_any = {
+			class = {
+				"xfce4-appfinder",
+				"Xfce4-appfinder",
+			},
+			name = { "Application Finder" },
+			properties = {
+				floating = true,
+				placement = awful.placement.centered,
+			},
+			-- properties = {
+			-- 	floating = true,
+			-- 	placement = awful.placement.centered,
+			-- },
+		},
+	},
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.
 	-- { rule = { class = "Firefox" },
