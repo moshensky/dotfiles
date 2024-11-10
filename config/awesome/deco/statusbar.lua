@@ -27,13 +27,20 @@ local time_color = "#ffffff"
 local date_widget = wibox.widget.textclock("<span foreground='" .. date_color .. "'>%a %-d %b </span>", 60)
 local time_widget = wibox.widget.textclock("<span foreground='" .. time_color .. "'>%l:%M %p  </span>", 1)
 
+local function hlspan(text)
+	return "<span foreground='" .. time_color .. "'>" .. text .. "</span>"
+end
+
 -- Date
-datewidget = wibox.widget.textbox()
+local datewidget = wibox.widget.textbox()
 vicious.register(datewidget, vicious.widgets.date, "%b %d, %R")
+
 -- Memory
-memwidget = wibox.widget.textbox()
+local memwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.mem)
-vicious.register(memwidget, vicious.widgets.mem, "$1 ($2MiB/$3MiB)", 13)
+local format_mem = "Mem: " .. hlspan("$1%")
+vicious.register(memwidget, vicious.widgets.mem, format_mem, 13)
+
 -- Cpu
 cpuwidget = awful.widget.graph()
 cpuwidget:set_width(50)
