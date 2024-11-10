@@ -51,45 +51,14 @@ RC.mainmenu = awful.menu({ items = main.menu() })
 RC.launcher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = RC.mainmenu })
 -- Menubar configuration
 menubar.utils.terminal = RC.vars.terminal -- Set the terminal for applications that require it
-
 -- Create a launcher widget and a main menu
-myawesomemenu = {
-	{
-		"hotkeys",
-		function()
-			hotkeys_popup.show_help(nil, awful.screen.focused())
-		end,
-	},
-	{ "manual", RC.vars.terminal .. " -e man awesome" },
-	{ "edit config", RC.vars.editor_cmd .. " " .. awesome.conffile },
-	{ "restart", awesome.restart },
-	{
-		"quit",
-		function()
-			awesome.quit()
-		end,
-	},
-}
-
-local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
-local menu_terminal = { "open terminal", RC.vars.terminal }
-
-if has_fdo then
-	mymainmenu = freedesktop.menu.build({
-		before = { menu_awesome },
-		after = { menu_terminal },
-	})
-else
-	mymainmenu = awful.menu({
-		items = {
-			menu_awesome,
-			{ "Debian", debian.menu.Debian_menu.Debian },
-			menu_terminal,
-		},
-	})
-end
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
+RC.launcher = awful.widget.launcher({
+	image = beautiful.awesome_icon,
+	menu = freedesktop.menu.build({
+		before = main.menu(),
+		after = {},
+	}),
+})
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
@@ -215,7 +184,7 @@ awful.screen.connect_for_each_screen(function(s)
 		layout = wibox.layout.align.horizontal,
 		{ -- Left widgets
 			layout = wibox.layout.fixed.horizontal,
-			mylauncher,
+			RC.launcher,
 			s.mytaglist,
 			s.mypromptbox,
 		},
