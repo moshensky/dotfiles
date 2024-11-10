@@ -102,6 +102,22 @@ function _M.get(clientkeys, clientbuttons, screen)
 			},
 		},
 
+		{
+			rule_any = {
+				-- class = "ViberPC",
+				name = { "Volume Control" },
+			},
+			properties = {
+				titlebars_enabled = true,
+				floating = true,
+				width = 0.35 * screen.primary.workarea.width,
+				height = 0.7 * screen.primary.workarea.height,
+				placement = function(c)
+					awful.placement.centered(c, { honor_workarea = true })
+				end,
+			},
+		},
+
 		-- Set Firefox to always map on the tag named "2" on screen 1.
 		-- { rule = { class = "Firefox" },
 		--   properties = { screen = 1, tag = "2" } },
