@@ -23,6 +23,7 @@ function _M.get(clientkeys, clientbuttons, screen)
 				buttons = clientbuttons,
 				screen = awful.screen.preferred,
 				placement = awful.placement.no_overlap + awful.placement.no_offscreen,
+				titlebars_enabled = false,
 			},
 		},
 
@@ -63,10 +64,10 @@ function _M.get(clientkeys, clientbuttons, screen)
 			},
 		},
 
-		-- Add titlebars to normal clients and dialogs
+		-- Add titlebars to dialogs
 		{
 			rule_any = {
-				type = { "normal", "dialog" },
+				type = { "dialog" },
 			},
 			properties = {
 				titlebars_enabled = true,
@@ -77,6 +78,7 @@ function _M.get(clientkeys, clientbuttons, screen)
 		{
 			rule = { class = "Xfce4-appfinder" },
 			properties = {
+				titlebars_enabled = true,
 				floating = true,
 				ontop = true, -- Optional: Keeps it above other windows
 				width = 0.35 * screen.primary.workarea.width,
@@ -90,6 +92,7 @@ function _M.get(clientkeys, clientbuttons, screen)
 		{
 			rule = { class = "ViberPC" },
 			properties = {
+				titlebars_enabled = true,
 				floating = true,
 				width = 0.35 * screen.primary.workarea.width,
 				height = 0.7 * screen.primary.workarea.height,
