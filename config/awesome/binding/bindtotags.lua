@@ -54,8 +54,6 @@ function _M.get(globalkeys)
 	return globalkeys
 end
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
 return setmetatable({}, {
 	__call = function(_, ...)
 		return _M.get(...)
