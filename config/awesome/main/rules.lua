@@ -73,21 +73,17 @@ function _M.get(clientkeys, clientbuttons)
 			},
 		},
 
+		-- Add rule for xfce4-appfinder to float and center
 		{
-			rule_any = {
-				class = {
-					"xfce4-appfinder",
-					"Xfce4-appfinder",
-				},
-				name = { "Application Finder" },
-				properties = {
-					floating = true,
-					placement = awful.placement.centered,
-				},
-				-- properties = {
-				-- 	floating = true,
-				-- 	placement = awful.placement.centered,
-				-- },
+			rule = { class = "Xfce4-appfinder" },
+			properties = {
+				floating = true,
+				ontop = true, -- Optional: Keeps it above other windows
+				width = 0.35 * screen.primary.workarea.width,
+				height = 0.5 * screen.primary.workarea.height,
+				placement = function(c)
+					awful.placement.centered(c, { honor_workarea = true })
+				end,
 			},
 		},
 
