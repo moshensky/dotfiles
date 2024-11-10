@@ -220,6 +220,7 @@ root.keys(RC.globalkeys)
 awful.rules.rules = main.rules(binding.clientkeys(), binding.clientbuttons())
 
 -- Custom Local Library: Common Functional Decoration
+require("deco.statusbar")
 require("deco.titlebar")
 
 -- Signals
