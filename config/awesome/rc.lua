@@ -212,15 +212,9 @@ awful.screen.connect_for_each_screen(function(s)
 end)
 -- }}}
 
--- {{{ Mouse bindings
-root.buttons(gears.table.join(
-	awful.button({}, 3, function()
-		RC.mainmenu:toggle()
-	end),
-	awful.button({}, 4, awful.tag.viewnext),
-	awful.button({}, 5, awful.tag.viewprev)
-))
--- }}}
+-- Set root
+-- Mouse bindings, aka right click menu
+root.buttons(binding.globalbuttons())
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
