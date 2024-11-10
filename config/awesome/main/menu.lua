@@ -40,11 +40,36 @@ M.awesome = {
 	},
 }
 
+-- TODO: eval apps and leave the ones I like
+M.favorite = {
+	{ "caja", "caja" },
+	{ "thunar", "thunar" },
+	{ "geany", "geany" },
+	{ "clementine", "clementine" },
+	{ "firefox", "firefox", awful.util.getdir("config") .. "/firefox.png" },
+	{ "chromium", "chromium" },
+	{ "&firefox", "firefox" },
+	{ "&thunderbird", "thunderbird" },
+	{ "libreoffice", "libreoffice" },
+	{ "transmission", "transmission-gtk" },
+	{ "gimp", "gimp" },
+	{ "inkscape", "inkscape" },
+	{ "screenshooter", "xfce4-screenshooter" },
+}
+
+-- TODO: eval apps and leave the ones I like
+M.network_main = {
+	{ "wicd-curses", "wicd-curses" },
+	{ "wicd-gtk", "wicd-gtk" },
+}
+
 function _M.get()
 	-- Main Menu
 	local menu_items = {
 		{ "awesome", M.awesome, beautiful.awesome_subicon },
 		{ "open terminal", terminal },
+		{ "network", M.network_main },
+		{ "favorite", M.favorite },
 	}
 
 	return menu_items

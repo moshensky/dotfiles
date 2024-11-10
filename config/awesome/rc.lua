@@ -43,15 +43,15 @@ awful.layout.layouts = RC.layouts
 -- Tags
 RC.tags = main.tags()
 
+-- Themes define colours, icons, font and wallpapers. NB! Has to be before menu.
+beautiful.init("~/.config/awesome/theme.lua")
+
 -- Menu
 RC.mainmenu = awful.menu({ items = main.menu() })
 RC.launcher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = RC.mainmenu })
-menubar.utils.terminal = RC.vars.terminal
+-- Menubar configuration
+menubar.utils.terminal = RC.vars.terminal -- Set the terminal for applications that require it
 
--- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/theme.lua")
-
--- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
 	{
@@ -90,10 +90,6 @@ else
 end
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
-
--- Menubar configuration
-menubar.utils.terminal = RC.vars.terminal -- Set the terminal for applications that require it
--- }}}
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
