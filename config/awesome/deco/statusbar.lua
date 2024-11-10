@@ -2,7 +2,9 @@
 local gears = require("gears")
 local awful = require("awful")
 
-local _M = {}
+-- Wibox handling library
+local wibox = require("wibox")
+local vicious = require("vicious")
 
 -- Custom Local Library: Common Functional Decoration
 local deco = {
@@ -14,15 +16,69 @@ local deco = {
 local taglist_buttons = deco.taglist()
 local tasklist_buttons = deco.tasklist()
 
+-- Widgets
+-- Keyboard map indicator and switcher
+mykeyboardlayout = awful.widget.keyboardlayout()
+
+-- {{{ Wibar
+-- Create a textclock widget
+local date_color = "#d791a8"
+local time_color = "#ffffff"
+local date_widget = wibox.widget.textclock("<span foreground='" .. date_color .. "'>%a %-d %b </span>", 60)
+local time_widget = wibox.widget.textclock("<span foreground='" .. time_color .. "'>%l:%M %p  </span>", 1)
+
+-- Date
+datewidget = wibox.widget.textbox()
+vicious.register(datewidget, vicious.widgets.date, "%b %d, %R")
+-- Memory
+memwidget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.mem)
+vicious.register(memwidget, vicious.widgets.mem, "$1 ($2MiB/$3MiB)", 13)
+-- Cpu
+cpuwidget = awful.widget.graph()
+cpuwidget:set_width(50)
+cpuwidget:set_background_color("#494B4F")
+cpuwidget:set_color({
+	type = "linear",
+	from = { 0, 0 },
+	to = { 50, 0 },
+	stops = {
+		{ 0, "#FF5656" },
+		{ 0.5, "#88A175" },
+		{ 1, "#AECF96" },
+	},
+})
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
+
 -- Wibar
+
+-- Create a textclock widget
+mytextclock = wibox.widget.textclock()
 
 awful.screen.connect_for_each_screen(function(s)
 	-- Wallpaper
 	set_wallpaper(s)
 
 	-- Create a promptbox for each screen
+	s.mypromptbox = awful.widget.prompt()
 
-	-- Create an imagebox widget
+	-- Create an imagebox widget which will contain an icon indicating which layout we're using.
+	-- We need one layoutbox per screen.
+	s.mylayoutbox = awful.widget.layoutbox(s)
+	s.mylayoutbox:buttons(gears.table.join(
+		awful.button({}, 1, function()
+			awful.layout.inc(1)
+		end),
+		awful.button({}, 3, function()
+			awful.layout.inc(-1)
+		end),
+		awful.button({}, 4, function()
+			awful.layout.inc(1)
+		end),
+		awful.button({}, 5, function()
+			awful.layout.inc(-1)
+		end)
+	))
 
 	-- Create a taglist widget
 	s.mytaglist = awful.widget.taglist({
@@ -39,6 +95,28 @@ awful.screen.connect_for_each_screen(function(s)
 	})
 
 	-- Create the wibox
+	s.mywibox = awful.wibar({ position = "top", screen = s })
 
 	-- Add widgets to the wibox
+	s.mywibox:setup({
+		layout = wibox.layout.align.horizontal,
+		{ -- Left widgets
+			layout = wibox.layout.fixed.horizontal,
+			RC.launcher,
+			s.mytaglist,
+			s.mypromptbox,
+		},
+		s.mytasklist, -- Middle widget
+		{ -- Right widgets
+			layout = wibox.layout.fixed.horizontal,
+			cpuwidget,
+			memwidget,
+			mykeyboardlayout,
+			wibox.widget.systray(),
+			-- datewidget,
+			-- date_widget,
+			time_widget,
+			s.mylayoutbox,
+		},
+	})
 end)
