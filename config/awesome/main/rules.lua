@@ -8,7 +8,7 @@ local _M = {}
 -- reading
 -- https://awesomewm.org/apidoc/libraries/awful.rules.html
 
-function _M.get(clientkeys, clientbuttons)
+function _M.get(clientkeys, clientbuttons, screen)
 	local rules = {
 
 		-- All clients will match this rule.
@@ -81,6 +81,18 @@ function _M.get(clientkeys, clientbuttons)
 				ontop = true, -- Optional: Keeps it above other windows
 				width = 0.35 * screen.primary.workarea.width,
 				height = 0.5 * screen.primary.workarea.height,
+				placement = function(c)
+					awful.placement.centered(c, { honor_workarea = true })
+				end,
+			},
+		},
+
+		{
+			rule = { class = "ViberPC" },
+			properties = {
+				floating = true,
+				width = 0.35 * screen.primary.workarea.width,
+				height = 0.7 * screen.primary.workarea.height,
 				placement = function(c)
 					awful.placement.centered(c, { honor_workarea = true })
 				end,

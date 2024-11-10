@@ -72,7 +72,7 @@ root.buttons(binding.globalbuttons())
 root.keys(RC.globalkeys)
 
 -- Rules
-awful.rules.rules = main.rules(binding.clientkeys(), binding.clientbuttons())
+awful.rules.rules = main.rules(binding.clientkeys(), binding.clientbuttons(), screen)
 
 -- Custom Local Library: Common Functional Decoration
 require("deco.statusbar")
