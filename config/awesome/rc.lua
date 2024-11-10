@@ -22,12 +22,19 @@ local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 -- Error handling
-require("./main/error-handling")
+require("main.error-handling")
 
 RC = {} -- global namespace, on top before require any modules
 RC.vars = require("main.user-variables")
 
 modkey = RC.vars.modkey
+
+local main = {
+	layouts = require("main.layouts"),
+	tags = require("main.tags"),
+	menu = require("main.menu"),
+	rules = require("main.rules"),
+}
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
