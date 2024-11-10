@@ -104,7 +104,6 @@ function _M.get(clientkeys, clientbuttons, screen)
 
 		{
 			rule_any = {
-				-- class = "ViberPC",
 				name = { "Volume Control" },
 			},
 			properties = {
