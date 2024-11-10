@@ -26,13 +26,26 @@ require("main.error-handling")
 RC = {} -- global namespace, on top before require any modules
 RC.vars = require("main.user-variables")
 
+-- Themes define colours, icons, font and wallpapers. NB! Has to be before menu.
+beautiful.init("~/.config/awesome/theme.lua")
+
 local modkey = RC.vars.modkey
 
+-- Custom Local Library
 local main = {
 	layouts = require("main.layouts"),
 	tags = require("main.tags"),
 	menu = require("main.menu"),
 	rules = require("main.rules"),
+}
+
+-- Custom Local Library: Keys and Mouse Binding
+local binding = {
+	globalbuttons = require("binding.globalbuttons"),
+	clientbuttons = require("binding.clientbuttons"),
+	globalkeys = require("binding.globalkeys"),
+	bindtotags = require("binding.bindtotags"),
+	clientkeys = require("binding.clientkeys"),
 }
 
 -- Layouts
@@ -42,14 +55,8 @@ awful.layout.layouts = RC.layouts
 -- Tags
 RC.tags = main.tags()
 
--- Themes define colours, icons, font and wallpapers. NB! Has to be before menu.
-beautiful.init("~/.config/awesome/theme.lua")
-
 -- Menu
 RC.mainmenu = awful.menu({ items = main.menu() })
-RC.launcher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = RC.mainmenu })
--- Menubar configuration
-menubar.utils.terminal = RC.vars.terminal -- Set the terminal for applications that require it
 -- Create a launcher widget and a main menu
 RC.launcher = awful.widget.launcher({
 	image = beautiful.awesome_icon,
@@ -58,6 +65,8 @@ RC.launcher = awful.widget.launcher({
 		after = {},
 	}),
 })
+-- Menubar configuration
+menubar.utils.terminal = RC.vars.terminal -- Set the terminal for applications that require it
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
