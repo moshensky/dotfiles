@@ -73,6 +73,24 @@ function _M.get(clientkeys, clientbuttons)
 			},
 		},
 
+		{
+			rule_any = {
+				class = {
+					"xfce4-appfinder",
+					"Xfce4-appfinder",
+				},
+				name = { "Application Finder" },
+				properties = {
+					floating = true,
+					placement = awful.placement.centered,
+				},
+				-- properties = {
+				-- 	floating = true,
+				-- 	placement = awful.placement.centered,
+				-- },
+			},
+		},
+
 		-- Set Firefox to always map on the tag named "2" on screen 1.
 		-- { rule = { class = "Firefox" },
 		--   properties = { screen = 1, tag = "2" } },
