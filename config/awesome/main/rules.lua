@@ -90,7 +90,10 @@ function _M.get(clientkeys, clientbuttons, screen)
 		},
 
 		{
-			rule = { class = "ViberPC" },
+			rule_any = {
+				class = { "Nm-connection-editor" },
+				name = { "Volume Control", "Network Connections", "Rakuten Viber" },
+			},
 			properties = {
 				titlebars_enabled = true,
 				floating = true,
@@ -102,21 +105,18 @@ function _M.get(clientkeys, clientbuttons, screen)
 			},
 		},
 
-		{
-			rule_any = {
-				class = { "Nm-connection-editor" },
-				name = { "Volume Control", "Network Connections" },
-			},
-			properties = {
-				titlebars_enabled = true,
-				floating = true,
-				width = 0.35 * screen.primary.workarea.width,
-				height = 0.7 * screen.primary.workarea.height,
-				placement = function(c)
-					awful.placement.centered(c, { honor_workarea = true })
-				end,
-			},
-		},
+		-- Viber notifications
+		-- {
+		-- 	rule = {
+		-- 		class = "ViberPC",
+		-- 	},
+		-- 	properties = {
+		-- 		placement = awful.placement.top_right,
+		-- 		border_width = 4,
+		-- 		border_color = "#00ff00",
+		-- 		titlebars_enabled = false,
+		-- 	},
+		-- },
 
 		-- Set Firefox to always map on the tag named "2" on screen 1.
 		-- { rule = { class = "Firefox" },

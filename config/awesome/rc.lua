@@ -18,7 +18,8 @@ local freedesktop = require("freedesktop")
 -- Error handling
 require("main.error-handling")
 
-RC = {} -- global namespace, on top before require any modules
+-- global namespace, on top before require any modules
+RC = {}
 RC.vars = require("main.user-variables")
 
 -- Themes define colours, icons, font and wallpapers. NB! Has to be before menu.
