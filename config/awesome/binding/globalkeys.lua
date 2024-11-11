@@ -149,7 +149,18 @@ function _M.get()
 		-- Menubar
 		awful.key({ modkey }, "p", function()
 			menubar.show()
-		end, { description = "show the menubar", group = "launcher" })
+		end, { description = "show the menubar", group = "launcher" }),
+
+		-- Media
+		awful.key({}, "XF86AudioRaiseVolume", function()
+			awful.util.spawn("amixer set Master 9%+")
+		end),
+		awful.key({}, "XF86AudioLowerVolume", function()
+			awful.util.spawn("amixer set Master 9%-")
+		end),
+		awful.key({}, "XF86AudioMute", function()
+			awful.util.spawn("amixer set Master toggle")
+		end)
 	)
 
 	return globalkeys
