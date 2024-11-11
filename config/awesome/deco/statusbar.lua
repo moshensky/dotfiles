@@ -16,6 +16,13 @@ local deco = {
 local taglist_buttons = deco.taglist()
 local tasklist_buttons = deco.tasklist()
 
+-- Awesome-wm-widgets
+local mk_volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+
+local volume_widget = mk_volume_widget({
+	widget_type = "arc", -- horizontal_bar, vertical_bar, icon, icon_and_text, arc
+})
+
 -- Widgets
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
@@ -118,6 +125,7 @@ awful.screen.connect_for_each_screen(function(s)
 			layout = wibox.layout.fixed.horizontal,
 			cpuwidget,
 			memwidget,
+			volume_widget,
 			mykeyboardlayout,
 			wibox.widget.systray(),
 			-- datewidget,
