@@ -15,6 +15,9 @@ end
 -- List of autostart applications
 function M.startup_apps()
 	M.run_once("nm-applet") -- Network Manager applet
+	-- Set natural scrolling
+	awful.util.spawn('xinput set-prop "Kensington      Kensington Expert Mouse" "libinput Natural Scrolling Enabled" 1')
+
 	-- M.run_once("picom --no-fading-openclose") -- Compositor
 	-- M.run_once("flameshot") -- Screenshot tool
 end
