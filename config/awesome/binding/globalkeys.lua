@@ -160,7 +160,7 @@ function _M.get()
 		end, { description = "mute", group = "audio" }),
 		awful.key({}, "XF86AudioPlay", function()
 			awful.util.spawn("playerctl play-pause")
-		end, { description = "play", group = "audio" }),
+		end, { description = "play/pause", group = "audio" }),
 		awful.key({}, "XF86AudioNext", function()
 			awful.util.spawn("playerctl next")
 		end, { description = "next", group = "audio" }),
