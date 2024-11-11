@@ -14,13 +14,18 @@ end
 
 -- List of autostart applications
 function M.startup_apps()
-	M.run_once("nm-applet") -- Network Makager applet
+	M.run_once("nm-applet --indicator") -- Network Makager applet
 	-- M.run_once("blueman-applet") -- Bluetooth
 	-- M.run_once("picom --no-fading-openclose") -- Compositor
 	-- M.run_once("flameshot") -- Screenshot tool
 
 	-- Set natural scrolling
-	awful.util.spawn('xinput set-prop "Kensington      Kensington Expert Mouse" "libinput Natural Scrolling Enabled" 1')
+	awful.spawn.with_shell(
+		'xinput set-prop "Kensington      Kensington Expert Mouse" "libinput Natural Scrolling Enabled" 1'
+	)
+	-- Set keyboard layout using setxkbmap
+	awful.spawn.with_shell("setxkbmap -layout us,bg -variant ,phonetic -option grp:alt_shift_toggle")
+	-- awful.spawn.with_shell("setxkbmap -layout us,bg -variant symbolic,phonetic -option grp:alt_shift_toggle")
 end
 
 return M
