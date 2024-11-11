@@ -146,23 +146,32 @@ function _M.get()
 			awful.client.moveresize(20, 0, 0, 0)
 		end),
 
-		-- Menubar
-		awful.key({ modkey }, "p", function()
-			menubar.show()
-		end, { description = "show the menubar", group = "launcher" }),
-
 		-- Media
 		awful.key({}, "XF86AudioRaiseVolume", function()
 			awful.util.spawn("amixer set Master unmute")
 			awful.util.spawn("amixer set Master 9%+")
-		end),
+		end, { description = "volume +", group = "audio" }),
 		awful.key({}, "XF86AudioLowerVolume", function()
 			awful.util.spawn("amixer set Master umnute")
 			awful.util.spawn("amixer set Master 9%-")
-		end),
+		end, { description = "volume -", group = "audio" }),
 		awful.key({}, "XF86AudioMute", function()
 			awful.util.spawn("amixer set Master toggle")
-		end)
+		end, { description = "mute", group = "audio" }),
+		awful.key({}, "XF86AudioPlay", function()
+			awful.util.spawn("playerctl play-pause")
+		end, { description = "play", group = "audio" }),
+		awful.key({}, "XF86AudioNext", function()
+			awful.util.spawn("playerctl next")
+		end, { description = "next", group = "audio" }),
+		awful.key({}, "XF86AudioPrev", function()
+			awful.util.spawn("playerctl previous")
+		end, { description = "prev", group = "audio" }),
+
+		-- Menubar
+		awful.key({ modkey }, "p", function()
+			menubar.show()
+		end, { description = "show the menubar", group = "launcher" })
 	)
 
 	return globalkeys
