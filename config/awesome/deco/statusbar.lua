@@ -4,7 +4,6 @@ local awful = require("awful")
 
 -- Wibox handling library
 local wibox = require("wibox")
-local vicious = require("vicious")
 
 -- Custom Local Library: Common Functional Decoration
 local deco = {
@@ -54,10 +53,6 @@ local time_widget = wibox.widget.textclock("<span foreground='" .. time_color ..
 local function hlspan(text)
 	return "<span foreground='" .. time_color .. "'>" .. text .. "</span>"
 end
-
--- Date
-local datewidget = wibox.widget.textbox()
-vicious.register(datewidget, vicious.widgets.date, "%b %d, %R")
 
 -- Wibar
 
