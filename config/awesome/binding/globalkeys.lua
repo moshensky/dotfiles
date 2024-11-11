@@ -153,9 +153,11 @@ function _M.get()
 
 		-- Media
 		awful.key({}, "XF86AudioRaiseVolume", function()
+			awful.util.spawn("amixer set Master unmute")
 			awful.util.spawn("amixer set Master 9%+")
 		end),
 		awful.key({}, "XF86AudioLowerVolume", function()
+			awful.util.spawn("amixer set Master umnute")
 			awful.util.spawn("amixer set Master 9%-")
 		end),
 		awful.key({}, "XF86AudioMute", function()
