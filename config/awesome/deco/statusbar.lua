@@ -59,32 +59,7 @@ end
 local datewidget = wibox.widget.textbox()
 vicious.register(datewidget, vicious.widgets.date, "%b %d, %R")
 
--- Memory
-local memwidget = wibox.widget.textbox()
-vicious.cache(vicious.widgets.mem)
-local format_mem = "Mem: " .. hlspan("$1%")
-vicious.register(memwidget, vicious.widgets.mem, format_mem, 13)
-
--- Cpu
-cpuwidget = awful.widget.graph()
-cpuwidget:set_width(50)
-cpuwidget:set_background_color("#494B4F")
-cpuwidget:set_color({
-	type = "linear",
-	from = { 0, 0 },
-	to = { 50, 0 },
-	stops = {
-		{ 0, "#FF5656" },
-		{ 0.5, "#88A175" },
-		{ 1, "#AECF96" },
-	},
-})
-vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
-
 -- Wibar
-
--- Create a textclock widget
-mytextclock = wibox.widget.textclock()
 
 awful.screen.connect_for_each_screen(function(s)
 	-- Wallpaper
@@ -140,16 +115,13 @@ awful.screen.connect_for_each_screen(function(s)
 		s.mytasklist, -- Middle widget
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
-			cpuwidget,
-			memwidget,
 			batteryarc_widget,
-			cpu_widget,
 			net_speed_widget,
+			cpu_widget,
 			ram_widget,
 			volume_widget,
 			mykeyboardlayout,
 			wibox.widget.systray(),
-			-- datewidget,
 			-- date_widget,
 			time_widget,
 			s.mylayoutbox,
