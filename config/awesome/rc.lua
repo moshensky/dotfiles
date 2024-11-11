@@ -13,7 +13,7 @@ local menubar = require("menubar")
 require("awful.hotkeys_popup.keys")
 
 -- Load freedesktop menu entries
-local freedesktop = require("freedesktop")
+-- local freedesktop = require("freedesktop")
 
 -- Error handling
 require("main.error-handling")
@@ -56,10 +56,11 @@ RC.mainmenu = awful.menu({ items = main.menu() })
 -- Create a launcher widget and a main menu
 RC.launcher = awful.widget.launcher({
 	image = beautiful.awesome_icon,
-	menu = freedesktop.menu.build({
-		before = main.menu(),
-		after = {},
-	}),
+	menu = RC.mainmenu,
+	-- menu = freedesktop.menu.build({
+	-- 	before = main.menu(),
+	-- 	after = {},
+	-- }),
 })
 -- Menubar configuration
 menubar.utils.terminal = RC.vars.terminal -- Set the terminal for applications that require it

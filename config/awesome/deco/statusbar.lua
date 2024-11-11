@@ -4,7 +4,7 @@ local awful = require("awful")
 
 -- Wibox handling library
 local wibox = require("wibox")
-local vicious = require("vicious")
+-- local vicious = require("vicious")
 
 -- Custom Local Library: Common Functional Decoration
 local deco = {
@@ -42,22 +42,18 @@ local volume_widget = mk_volume_widget({
 
 -- Widgets
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+local mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
 local date_color = "#d791a8"
 local time_color = "#ffffff"
-local date_widget = wibox.widget.textclock("<span foreground='" .. date_color .. "'>%a %-d %b </span>", 60)
+-- local date_widget = wibox.widget.textclock("<span foreground='" .. date_color .. "'>%a %-d %b </span>", 60)
 local time_widget = wibox.widget.textclock("<span foreground='" .. time_color .. "'>%l:%M %p  </span>", 1)
 
 local function hlspan(text)
 	return "<span foreground='" .. time_color .. "'>" .. text .. "</span>"
 end
-
--- Date
-local datewidget = wibox.widget.textbox()
-vicious.register(datewidget, vicious.widgets.date, "%b %d, %R")
 
 -- Wibar
 
