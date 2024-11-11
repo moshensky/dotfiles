@@ -42,7 +42,7 @@ local volume_widget = mk_volume_widget({
 
 -- Widgets
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+mykeyboardlayout = awful.widget.keyboardlayout({ country_codes = { "us", "bg" } })
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -115,13 +115,13 @@ awful.screen.connect_for_each_screen(function(s)
 		s.mytasklist, -- Middle widget
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
+			wibox.widget.systray(),
 			batteryarc_widget,
 			net_speed_widget,
 			cpu_widget,
 			ram_widget,
 			volume_widget,
 			mykeyboardlayout,
-			wibox.widget.systray(),
 			-- date_widget,
 			time_widget,
 			s.mylayoutbox,
