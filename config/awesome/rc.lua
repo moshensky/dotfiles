@@ -80,3 +80,6 @@ require("deco.titlebar")
 
 -- Signals
 require("main.signals")
+
+-- Autostart
+require("main.autostart").startup_apps()

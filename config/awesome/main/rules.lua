@@ -104,7 +104,8 @@ function _M.get(clientkeys, clientbuttons, screen)
 
 		{
 			rule_any = {
-				name = { "Volume Control" },
+				class = { "Nm-connection-editor" },
+				name = { "Volume Control", "Network Connections" },
 			},
 			properties = {
 				titlebars_enabled = true,
