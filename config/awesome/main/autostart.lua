@@ -1,0 +1,31 @@
+local awful = require("awful")
+
+local M = {}
+
+-- Function to run a command if it's not already running
+function M.run_once(cmd)
+	local findme = cmd
+	local firstspace = cmd:find(" ")
+	if firstspace then
+		findme = cmd:sub(1, firstspace - 1)
+	end
+	awful.spawn.easy_async_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || " .. cmd)
+end
+
+-- List of autostart applications
+function M.startup_apps()
+	M.run_once("nm-applet --indicator") -- Network Makager applet
+	-- M.run_once("blueman-applet") -- Bluetooth
+	-- M.run_once("picom --no-fading-openclose") -- Compositor
+	-- M.run_once("flameshot") -- Screenshot tool
+
+	-- Set natural scrolling
+	awful.spawn.with_shell(
+		'xinput set-prop "Kensington      Kensington Expert Mouse" "libinput Natural Scrolling Enabled" 1'
+	)
+	-- Set keyboard layout using setxkbmap
+	awful.spawn.with_shell("setxkbmap -layout us,bg -variant ,phonetic -option grp:alt_shift_toggle")
+	-- awful.spawn.with_shell("setxkbmap -layout us,bg -variant symbolic,phonetic -option grp:alt_shift_toggle")
+end
+
+return M

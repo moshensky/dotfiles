@@ -176,12 +176,39 @@ return {
           -- capabilities = {},
           settings = {
             Lua = {
+              runtime = {
+                version = 'LuaJIT',
+                path = {
+                  '?/init.lua',
+                  '?.lua',
+                },
+              },
+              workspace = {
+                library = {
+                  '/usr/share/nvim/runtime/lua',
+                  '/usr/share/nvim/runtime/lua/lsp',
+                  '/usr/share/awesome/lib',
+                },
+              },
               completion = {
+                enable = true,
                 callSnippet = 'Replace',
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = {
+                enable = true,
+                globals = { 'vim', 'awesome', 'client', 'root' },
+              },
+              telemetry = {
+                enable = false,
+              },
             },
+            -- Lua = {
+            --   completion = {
+            --     callSnippet = 'Replace',
+            --   },
+            --   -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+            --   -- diagnostics = { disable = { 'missing-fields' } },
+            -- },
           },
         },
       }
