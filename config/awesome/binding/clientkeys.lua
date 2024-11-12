@@ -60,14 +60,15 @@ local key_definitions = {
 			c:move_to_screen()
 		end,
 	},
-	{
-		"toggle keep on top",
-		{ modkey, "Control" },
-		"t",
-		function(c)
-			c.ontop = not c.ontop
-		end,
-	},
+	-- Interfear with wezterm default key binding for new tab
+	-- {
+	-- 	"toggle keep on top",
+	-- 	{ modkey },
+	-- 	"t",
+	-- 	function(c)
+	-- 		c.ontop = not c.ontop
+	-- 	end,
+	-- },
 	{
 		"minimize",
 		{ modkey },
