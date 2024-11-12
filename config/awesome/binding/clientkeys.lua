@@ -62,7 +62,7 @@ local key_definitions = {
 	},
 	{
 		"toggle keep on top",
-		{ modkey },
+		{ modkey, "Control" },
 		"t",
 		function(c)
 			c.ontop = not c.ontop
