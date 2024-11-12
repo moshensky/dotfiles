@@ -20,7 +20,7 @@ local _M = {}
 function _M.get()
 	local globalkeys = gears.table.join(
 		awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
-		awful.key({ modkey }, "t", function()
+		awful.key({ modkey, "Shift" }, "t", function()
 			local traywidget = wibox.widget.systray()
 			traywidget:set_screen(awful.screen.focused())
 		end, { description = "move systray to screen", group = "awesome" }),
