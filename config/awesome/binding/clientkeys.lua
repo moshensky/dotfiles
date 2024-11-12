@@ -34,10 +34,15 @@ local key_definitions = {
 		end,
 	},
 	{
-		"toggle floating",
-		{ modkey, "Control" },
-		"space",
-		awful.client.floating.toggle,
+		"toggle floating and center",
+		{ modkey, "Shift" },
+		"c",
+		function(c)
+			c.floating = not c.floating
+			if c.floating then
+				awful.placement.centered(c, { honor_workarea = true })
+			end
+		end,
 	},
 	{
 		"move to master",

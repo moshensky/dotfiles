@@ -31,7 +31,7 @@ local cpu_widget = mk_cpu_widget({
 	step_width = 2,
 	step_spacing = 0,
 	color = "#434c5e",
-	enable_kill_button = true,
+	-- enable_kill_button = true,
 })
 local net_speed_widget = mk_net_speed_widget()
 local ram_widget = mk_ram_widget()
