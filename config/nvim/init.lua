@@ -179,10 +179,10 @@ vim.keymap.set('n', '<leader>qq', vim.diagnostic.setloclist, { desc = 'Open diag
 vim.keymap.set('n', '<leader>qf', vim.diagnostic.open_float, { desc = 'Open diagnostic [F]loat list' })
 
 --  Control the size of splits (heigth/width)
-vim.keymap.set('n', '<M-,>', '<c-w>5<')
-vim.keymap.set('n', '<M-.>', '<c-w>5>')
-vim.keymap.set('n', '<M-t>', '<c-W>+') -- taler
-vim.keymap.set('n', '<M-s>', '<c-W>-') -- shorter
+vim.keymap.set('n', '<M-h>', '<c-w>5<')
+vim.keymap.set('n', '<M-l>', '<c-w>5>')
+vim.keymap.set('n', '<M-j>', '<c-W>+') -- taler
+vim.keymap.set('n', '<M-k>', '<c-W>-') -- shorter
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
