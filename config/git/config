@@ -33,3 +33,5 @@
 
 [rebase]
 	updateRefs = true
+[alias]
+	reset-to-main = !git reset $(git merge-base main $(git branch --show-current))
