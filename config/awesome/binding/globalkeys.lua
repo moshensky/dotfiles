@@ -67,6 +67,10 @@ function _M.get()
 		end, { description = "go back", group = "client" }),
 
 		-- Standard program
+		awful.key({ modkey, "Mod1" }, "q", function()
+			awful.spawn("xscreensaver-command -activate")
+		end, { description = "activate screensaver", group = "launcher" }),
+
 		awful.key({ modkey }, "Return", function()
 			awful.spawn(terminal)
 		end, { description = "open a terminal", group = "launcher" }),

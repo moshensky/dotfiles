@@ -14,7 +14,11 @@ end
 
 -- List of autostart applications
 function M.startup_apps()
-	M.run_once("nm-applet --indicator") -- Network Makager applet
+	-- Network manager applet
+	M.run_once("nm-applet --indicator")
+	-- Screensaver
+	M.run_once("xscreensaver -nosplash &")
+
 	-- M.run_once("blueman-applet") -- Bluetooth
 	-- M.run_once("picom --no-fading-openclose") -- Compositor
 	-- M.run_once("flameshot") -- Screenshot tool
