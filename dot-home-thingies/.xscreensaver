@@ -1,11 +1,11 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 6.06 for nikita on Fri Nov 15 12:12:58 2024.
+# Written by xscreensaver-settings 6.06 for nikita on Fri Nov 15 12:47:56 2024.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:10:00
 cycle:		0:10:00
-lock:		False
-lockTimeout:	0:00:00
+lock:		True
+lockTimeout:	0:01:00
 passwdTimeout:	0:00:30
 visualID:	default
 installColormap:    True
@@ -37,7 +37,7 @@ textFile:
 textProgram:	fortune
 textURL:	https://planet.debian.org/rss20.xml
 dialogTheme:	default
-settingsGeom:	0,810 -1,-1
+settingsGeom:	0,810 1926,810
 
 programs:								      \
 				maze --root				    \n\
@@ -183,7 +183,7 @@ programs:								      \
 				fontglide --root			    \n\
   GL: 				gleidescope --root			    \n\
   GL: 				glknots --root				    \n\
-  GL: 				glmatrix --root				    \n\
+  GL: 				glmatrix --root --density 30 --fps	    \n\
 - GL: 				glslideshow --root			    \n\
   GL: 				hypertorus --root			    \n\
 - GL: 				jigglypuff --root			    \n\
