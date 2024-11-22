@@ -48,12 +48,18 @@ if ! grep -q "$GRP_CTRL_SPACE_TOGGLE" "$EVDEV_XML"; then
 	echo "Adding $GRP_CTRL_SPACE_TOGGLE to $EVDEV_XML..."
 	# Add XML_ENTRY before the closing </layoutList> tag
 	# https://unix.stackexchange.com/questions/533683/how-can-i-use-sed-to-insert-some-text-after-a-multiline-match
-	# sed -i "/<\/layoutList>/i $XML_ENTRY" "$EVDEV_XML"
+	#
+	# :a              # begin loop
+	# N               # append next line to pattern space
+	# /.*option.*/!ba # if we haven't matched the end marker yet, branch back to a
+	# a\              # append after loop exits
+	#
 	sed -i.$(date -u +"%Y-%m-%dT%H:%M:%S").bak "/.*grp:switch.*/{
 	:a
 	N
 	/.*option.*/!ba
-	a\foobar
+	a\
+	foobar
 	}
 	" "$EVDEV_XML"
 else
