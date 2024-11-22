@@ -33,7 +33,7 @@ XML_ENTRY="
 "
 
 # Check and modify evdev.lst
-if ! grep -q "grp:ctrl_space_toggle" "$EVDEV_LST"; then
+if ! grep -q "$LST_ENTRY" "$EVDEV_LST"; then
 	echo "Adding grp:ctrl_space_toggle to $EVDEV_LST..."
 	# Insert after the first occurrence of a line starting with 'grp:'
 	sed -i "0,/^  grp:.*$/s//&\n$LST_ENTRY/" "$EVDEV_LST"
