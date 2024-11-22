@@ -59,7 +59,7 @@ if ! grep -q "$GRP_CTRL_SPACE_TOGGLE" "$EVDEV_XML"; then
 	N
 	/.*option.*/!ba
 	a\
-	$(echo $XML_ENTRY | sed 's/\//\\\//g')
+	\      $(echo $XML_ENTRY | sed 's/\//\\\//g')
 	}
 	" "$EVDEV_XML"
 else
