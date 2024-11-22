@@ -36,7 +36,7 @@ XML_ENTRY="
 if ! grep -q "$LST_ENTRY" "$EVDEV_LST"; then
 	echo "Adding grp:ctrl_space_toggle to $EVDEV_LST..."
 	# Insert after the first occurrence of a line starting with 'grp:'
-	sed -i "0,/^  grp:.*$/s//&\n$LST_ENTRY/" "$EVDEV_LST"
+	sed -i.$(date -u +"%Y-%m-%dT%H:%M:%S").bak "0,/^  grp:.*$/s//&\n$LST_ENTRY/" "$EVDEV_LST"
 else
 	echo "grp:ctrl_space_toggle already exists in $EVDEV_LST. Skipping."
 fi
