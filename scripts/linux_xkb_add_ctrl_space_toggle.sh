@@ -1,4 +1,23 @@
 #!/bin/bash
+#
+# Script Name: add_ctrl_space_toggle.sh
+#
+# Description:
+# This script modifies the X keyboard configuration files (`evdev.lst` and `evdev.xml`)
+# to add a new keyboard layout group option: `grp:ctrl_space_toggle`.
+# This option allows switching between keyboard layouts using `Ctrl+Space`.
+#
+# Features:
+# - Idempotent: Prevents duplicate entries if the script is run multiple times.
+# - Automatically updates configuration files in `/usr/share/X11/xkb/rules/`.
+#
+# Usage:
+# - Run the script as root (requires sudo for modifying system files).
+# - Example: `sudo ./add_ctrl_space_toggle.sh`
+#
+# Notes:
+# - Back up the configuration files before running this script.
+# - Restart the X server or display manager after running to apply changes.
 
 # File paths (update these if your system uses different paths)
 EVDEV_LST="/usr/share/X11/xkb/rules/evdev.lst"
