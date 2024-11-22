@@ -28,7 +28,7 @@ function M.startup_apps()
 		'xinput set-prop "Kensington      Kensington Expert Mouse" "libinput Natural Scrolling Enabled" 1'
 	)
 	-- Set keyboard layout using setxkbmap
-	awful.spawn.with_shell("setxkbmap -layout us,bg -variant ,phonetic -option grp:alt_shift_toggle")
+	awful.spawn.with_shell("setxkbmap -layout us,bg -variant ,phonetic -option grp:ctrl_space_toggle")
 	-- Disable laptop display if hdmi is connected
 	awful.spawn.with_shell(
 		'xrandr | grep -q "eDP-1 connected" && xrandr | grep -q "HDMI-1 connected" && xrandr --output eDP-1 --off'
