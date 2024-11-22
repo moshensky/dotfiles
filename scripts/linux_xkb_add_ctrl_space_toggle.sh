@@ -24,7 +24,9 @@ EVDEV_LST="/usr/share/X11/xkb/rules/evdev.lst"
 EVDEV_XML="/usr/share/X11/xkb/rules/evdev.xml"
 
 # Group description
-LST_ENTRY="  grp:ctrl_space_toggle  Toggle layout using Ctrl+Space"
+GRP_CTRL_SPACE_TOGGLE="grp:ctrl_space_toggle"
+GRP_CTRL_SPACE_TOGGLE_DESC="Toggle layout using Ctrl+Space"
+LST_ENTRY="  $GRP_CTRL_SPACE_TOGGLE  $GRP_CTRL_SPACE_TOGGLE_DESC"
 XML_ENTRY="
     <option>
         <name>grp:ctrl_space_toggle</name>
@@ -33,12 +35,12 @@ XML_ENTRY="
 "
 
 # Check and modify evdev.lst
-if ! grep -q "$LST_ENTRY" "$EVDEV_LST"; then
-	echo "Adding grp:ctrl_space_toggle to $EVDEV_LST..."
+if ! grep -q "$GRP_CTRL_SPACE_TOGGLE" "$EVDEV_LST"; then
+	echo "Adding $GRP_CTRL_SPACE_TOGGLE to $EVDEV_LST..."
 	# Insert after the first occurrence of a line starting with 'grp:'
 	sed -i.$(date -u +"%Y-%m-%dT%H:%M:%S").bak "0,/^  grp:.*$/s//&\n$LST_ENTRY/" "$EVDEV_LST"
 else
-	echo "grp:ctrl_space_toggle already exists in $EVDEV_LST. Skipping."
+	echo "$GRP_CTRL_SPACE_TOGGLE already exists in $EVDEV_LST. Skipping."
 fi
 
 # # Check and modify evdev.xml
