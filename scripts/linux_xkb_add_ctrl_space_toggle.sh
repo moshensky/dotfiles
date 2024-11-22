@@ -27,11 +27,11 @@ EVDEV_XML="/usr/share/X11/xkb/rules/evdev.xml"
 GRP_CTRL_SPACE_TOGGLE="grp:ctrl_space_toggle"
 GRP_CTRL_SPACE_TOGGLE_DESC="Toggle layout using Ctrl+Space"
 LST_ENTRY="  $GRP_CTRL_SPACE_TOGGLE  $GRP_CTRL_SPACE_TOGGLE_DESC"
-XML_ENTRY="
-    <option>
-        <name>$GRP_CTRL_SPACE_TOGGLE</name>
-        <desc>$GRP_CTRL_SPACE_TOGGLE_DESC</desc>
-    </option>
+XML_ENTRY="\
+    <option>\
+        <name>$GRP_CTRL_SPACE_TOGGLE</name>\
+        <desc>$GRP_CTRL_SPACE_TOGGLE_DESC</desc>\
+    </option>\
 "
 
 # Check and modify evdev.lst
@@ -59,7 +59,7 @@ if ! grep -q "$GRP_CTRL_SPACE_TOGGLE" "$EVDEV_XML"; then
 	N
 	/.*option.*/!ba
 	a\
-	foobar
+	$(echo $XML_ENTRY | sed 's/\//\\\//g')
 	}
 	" "$EVDEV_XML"
 else
