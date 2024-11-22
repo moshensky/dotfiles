@@ -43,13 +43,13 @@ else
 	echo "$GRP_CTRL_SPACE_TOGGLE already exists in $EVDEV_LST. Skipping."
 fi
 
-# # Check and modify evdev.xml
-# if ! grep -q "<name>grp:ctrl_space_toggle</name>" "$EVDEV_XML"; then
-# 	echo "Adding grp:ctrl_space_toggle to $EVDEV_XML..."
-# 	# Add XML_ENTRY before the closing </layoutList> tag
-# 	sed -i "/<\/layoutList>/i $XML_ENTRY" "$EVDEV_XML"
-# else
-# 	echo "grp:ctrl_space_toggle already exists in $EVDEV_XML. Skipping."
-# fi
-#
-# echo "Done. Remember to restart your X server for changes to take effect."
+# Check and modify evdev.xml
+if ! grep -q "<name>grp:ctrl_space_toggle</name>" "$EVDEV_XML"; then
+	echo "Adding grp:ctrl_space_toggle to $EVDEV_XML..."
+	# Add XML_ENTRY before the closing </layoutList> tag
+	sed -i "/<\/layoutList>/i $XML_ENTRY" "$EVDEV_XML"
+else
+	echo "grp:ctrl_space_toggle already exists in $EVDEV_XML. Skipping."
+fi
+
+echo "Done. Remember to restart your X server for changes to take effect."
