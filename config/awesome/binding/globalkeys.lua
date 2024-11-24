@@ -158,15 +158,15 @@ function _M.get()
 
 		-- Media
 		awful.key({}, "XF86AudioRaiseVolume", function()
-			awful.util.spawn("amixer set Master unmute")
-			awful.util.spawn("amixer set Master 9%+")
+			awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ 0")
+			awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@  +9%")
 		end, { description = "volume +", group = "audio" }),
 		awful.key({}, "XF86AudioLowerVolume", function()
-			awful.util.spawn("amixer set Master umnute")
-			awful.util.spawn("amixer set Master 9%-")
+			awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ 0")
+			awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ -9%")
 		end, { description = "volume -", group = "audio" }),
 		awful.key({}, "XF86AudioMute", function()
-			awful.util.spawn("amixer set Master toggle")
+			awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
 		end, { description = "mute", group = "audio" }),
 		awful.key({}, "XF86AudioPlay", function()
 			awful.util.spawn("playerctl play-pause")
