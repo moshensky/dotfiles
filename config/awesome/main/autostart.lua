@@ -19,7 +19,7 @@ function M.startup_apps()
 	-- Screensaver
 	M.run_once("xscreensaver -nosplash &")
 	-- Automount usb disks
-	M.run_once("udiskie")
+	M.run_once("udiskie --tray")
 
 	-- M.run_once("blueman-applet") -- Bluetooth
 	-- M.run_once("picom --no-fading-openclose") -- Compositor
