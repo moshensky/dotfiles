@@ -18,6 +18,8 @@ function M.startup_apps()
 	M.run_once("nm-applet --indicator")
 	-- Screensaver
 	M.run_once("xscreensaver -nosplash &")
+	-- Automount usb disks
+	M.run_once("udiskie")
 
 	-- M.run_once("blueman-applet") -- Bluetooth
 	-- M.run_once("picom --no-fading-openclose") -- Compositor
