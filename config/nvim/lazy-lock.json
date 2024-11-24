@@ -6,7 +6,7 @@
   "conform.nvim": { "branch": "master", "commit": "d28ccf945374edd9f1c34a82f6c22261dbd8ab98" },
   "fidget.nvim": { "branch": "main", "commit": "e2a175c2abe2d4f65357da1c98c59a5cfb2b543f" },
   "gitsigns.nvim": { "branch": "main", "commit": "4daf7022f1481edf1e8fb9947df13bb07c18e89a" },
-  "lazy.nvim": { "branch": "main", "commit": "b1134ab82ee4279e31f7ddf7e34b2a99eb9b7bc9" },
+  "lazy.nvim": { "branch": "main", "commit": "7967abe55752aa90532e6bb4bd4663fe27a264cb" },
   "lazydev.nvim": { "branch": "main", "commit": "d5800897d9180cea800023f2429bce0a94ed6064" },
   "lazygit.nvim": { "branch": "main", "commit": "56760339a81cd1540d5a72fd9d93010a2677b55d" },
   "luvit-meta": { "branch": "main", "commit": "ce76f6f6cdc9201523a5875a4471dcfe0186eb60" },
