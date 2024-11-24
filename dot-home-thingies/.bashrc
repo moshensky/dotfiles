@@ -119,3 +119,6 @@ source /usr/share/nvm/init-nvm.sh
 
 export EDITOR=nvim
 export VISUAL=nvim
+
+# starship has to be at the end
+eval "$(starship init bash)"
