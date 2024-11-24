@@ -177,6 +177,9 @@ function _M.get()
 		awful.key({}, "XF86AudioPrev", function()
 			awful.util.spawn("playerctl previous")
 		end, { description = "prev", group = "audio" }),
+		awful.key({ modkey }, "v", function()
+			awful.util.spawn("pwvucontrol")
+		end, { description = "pwvucpwontrol", group = "audio" }),
 
 		-- Menubar
 		awful.key({ modkey }, "p", function()

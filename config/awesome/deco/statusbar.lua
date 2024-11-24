@@ -19,7 +19,6 @@ local tasklist_buttons = deco.tasklist()
 local mk_cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local mk_net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local mk_ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
-local mk_volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 
 local cpu_widget = mk_cpu_widget({
 	width = 70,
@@ -30,9 +29,6 @@ local cpu_widget = mk_cpu_widget({
 })
 local net_speed_widget = mk_net_speed_widget()
 local ram_widget = mk_ram_widget()
-local volume_widget = mk_volume_widget({
-	widget_type = "arc", -- horizontal_bar, vertical_bar, icon, icon_and_text, arc
-})
 
 -- Widgets
 -- Keyboard map indicator and switcher
@@ -109,7 +105,6 @@ awful.screen.connect_for_each_screen(function(s)
 			net_speed_widget,
 			cpu_widget,
 			ram_widget,
-			volume_widget,
 			mykeyboardlayout,
 			-- date_widget,
 			time_widget,
