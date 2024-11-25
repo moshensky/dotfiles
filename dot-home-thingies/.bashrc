@@ -117,6 +117,11 @@ fi
 # nvm
 source /usr/share/nvm/init-nvm.sh
 
+# dotnet
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+
+# VA
 export EDITOR=nvim
 export VISUAL=nvim
 
