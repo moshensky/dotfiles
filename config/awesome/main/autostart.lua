@@ -27,7 +27,6 @@ function M.startup_apps()
 
 	-- Set keyboard layout using setxkbmap
 	awful.spawn.with_shell("setxkbmap -layout us,bg -variant ,phonetic -option grp:ctrl_space_toggle")
-	-- awful.spawn.with_shell("setxkbmap -layout us,bg -variant symbolic,phonetic -option grp:alt_shift_toggle")
 end
 
 return M
