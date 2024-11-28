@@ -45,6 +45,26 @@ local function hlspan(text)
 	return "<span foreground='" .. time_color .. "'>" .. text .. "</span>"
 end
 
+-- Sensors widget
+-- NVMe PCI temp: cat /sys/class/hwmon/hwmon1/temp1_input
+-- iGPU temp: cat /sys/class/hwmon/hwmon2/temp1_input
+-- CPU temp: cat /sys/class/hwmon/hwmon3/temp1_input
+-- MB (temp1) System1 temp: cat /sys/class/hwmon/hwmon4/temp1_input
+-- MB (temp2) PCH temp: cat /sys/class/hwmon/hwmon4/temp2_input
+-- MB (temp3) CPU temp: cat /sys/class/hwmon/hwmon4/temp3_input
+-- MB (temp4) PCIEX16 temp: cat /sys/class/hwmon/hwmon4/temp4_input
+-- MB (temp5) VRM MOS temp: cat /sys/class/hwmon/hwmon4/temp5_input
+-- MB (temp6) ES_TEMP1 temp: cat /sys/class/hwmon/hwmon4/temp6_input
+--
+local sensors_widget = awful.widget.watch("sensors", 15, function(widget, stdout)
+	for line in stdout:gmatch("[^\r\n]+") do
+		if line:match("temp1") then
+			widget:set_text(line)
+			return
+		end
+	end
+end)
+
 -- Wibar
 
 awful.screen.connect_for_each_screen(function(s)
