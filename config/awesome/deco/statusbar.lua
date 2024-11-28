@@ -30,29 +30,21 @@ local cpu_widget = mk_cpu_widget({
 local net_speed_widget = mk_net_speed_widget()
 local ram_widget = mk_ram_widget()
 
--- Widgets
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout({ country_codes = { "us", "bg" } })
+-- Keyboard map indicator and switcher widget
+local mykeyboardlayout = awful.widget.keyboardlayout({ country_codes = { "us", "bg" } })
 
--- {{{ Wibar
 -- Create a textclock widget
-local date_color = "#d791a8"
 local time_color = "#ffffff"
-local date_widget = wibox.widget.textclock("<span foreground='" .. date_color .. "'>%a %-d %b </span>", 60)
 local time_widget = wibox.widget.textclock("<span foreground='" .. time_color .. "'>%l:%M %p  </span>", 1)
-
-local function hlspan(text)
-    return "<span foreground='" .. time_color .. "'>" .. text .. "</span>"
-end
 
 -- Sensors widget
 local create_sensors_widget = require("deco.sensors_widget")
 
 -- Define sensor paths
 local sensor_paths = {
-    { path = "/sys/class/hwmon/hwmon1/temp1_input", label = "NVMe" },
-    { path = "/sys/class/hwmon/hwmon2/temp1_input", label = "iGPU" },
     { path = "/sys/class/hwmon/hwmon3/temp1_input", label = "CPU" },
+    { path = "/sys/class/hwmon/hwmon2/temp1_input", label = "iGPU" },
+    { path = "/sys/class/hwmon/hwmon1/temp1_input", label = "NVMe" },
     { path = "/sys/class/hwmon/hwmon4/temp1_input", label = "System1" },
     { path = "/sys/class/hwmon/hwmon4/temp2_input", label = "PCH" },
     { path = "/sys/class/hwmon/hwmon4/temp3_input", label = "CPU2" },
@@ -61,7 +53,7 @@ local sensor_paths = {
     { path = "/sys/class/hwmon/hwmon4/temp6_input", label = "ES_TEMP1" },
 }
 
-local sensors_widget = create_sensors_widget(sensor_paths, thresholds)
+local sensors_widget = create_sensors_widget(sensor_paths)
 
 -- Wibar
 

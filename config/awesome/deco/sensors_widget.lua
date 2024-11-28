@@ -1,17 +1,29 @@
 local wibox = require("wibox")
 local gears = require("gears")
-local awful = require("awful")
 
 -- Function to create the sensor widget
 local function create_sensors_widget(sensor_paths, thresholds)
     -- Default thresholds if not provided
     thresholds = thresholds
         or {
-            blue = 40, -- Cool
-            green = 70, -- Normal
-            orange = 85, -- High
-            red = 100, -- Critical
+            cool = 40,
+            normal = 70,
+            high = 85,
+            critical = 100,
         }
+
+    -- Function to determine color based on temperature
+    local function get_color(temp)
+        if temp < thresholds.cool then
+            return "#ffffff" -- White
+        elseif temp < thresholds.normal then
+            return "#00FF00" -- Green
+        elseif temp < thresholds.hight then
+            return "#FFA500" -- Orange
+        else
+            return "#FF0000" -- Red
+        end
+    end
 
     -- Create the widget
     local sensors_widget = wibox.widget({
@@ -50,18 +62,9 @@ local function create_sensors_widget(sensor_paths, thresholds)
             return '<span color="#888888">N/A</span>' -- Gray for unavailable sensors
         end
 
-        local color
-        if value < thresholds.blue then
-            color = "#0000FF" -- Blue
-        elseif value < thresholds.green then
-            color = "#00FF00" -- Green
-        elseif value < thresholds.orange then
-            color = "#FFA500" -- Orange
-        else
-            color = "#FF0000" -- Red
-        end
+        local color = get_color(value)
 
-        -- return string.format('<span color="%s">%.1f°C %d</span>', color, value)
+        -- return string.format('<span color="%s">%.1f°C</span>', color, value)
         local whole_number = math.floor(value + 0.5)
         return string.format('<span color="%s">%d°C</span>', color, whole_number)
     end
@@ -75,7 +78,7 @@ local function create_sensors_widget(sensor_paths, thresholds)
             table.insert(formatted, string.format("%s: %s", sensor.label, value_str))
         end
 
-        return table.concat(formatted, "  ") -- Join with spaces for separation
+        return table.concat(formatted, "|") -- Join with spaces for separation
     end
 
     -- Function to update the widget
