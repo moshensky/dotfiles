@@ -112,9 +112,9 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
+            cpu_widget,
             sensors_widget,
             net_speed_widget,
-            cpu_widget,
             ram_widget,
             mykeyboardlayout,
             -- date_widget,
