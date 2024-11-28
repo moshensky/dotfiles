@@ -2,18 +2,20 @@ local wibox = require("wibox")
 local gears = require("gears")
 
 -- Function to create the sensor widget
-local function create_sensors_widget(sensor_paths, thresholds)
-    -- Default thresholds if not provided
-    thresholds = thresholds
-        or {
-            cool = 40,
-            normal = 70,
-            high = 85,
-            critical = 100,
-        }
+local function create_sensors_widget(sensor_paths)
+    -- Default thresholds by sensor type
+    local preset_thresholds = {
+        MB = { cool = 45, normal = 60, high = 75, critycal = 100 },
+        VRM = { cool = 45, normal = 70, high = 80, critycal = 100 },
+        PCIEx16 = { cool = 50, normal = 80, high = 90, critycal = 100 },
+        GPU = { cool = 40, normal = 70, high = 85, critycal = 100 },
+        CPU = { cool = 50, normal = 75, high = 95, critycal = 105 },
+        NVMe = { cool = 41, normal = 71, high = 85, critycal = 95 },
+        DEFAULT = { cool = 35, normal = 65, hight = 85, critycal = 95 },
+    }
 
     -- Function to determine color based on temperature
-    local function get_color(temp)
+    local function get_color(temp, thresholds)
         if temp < thresholds.cool then
             return "#ffffff" -- White
         elseif temp < thresholds.normal then
@@ -43,26 +45,29 @@ local function create_sensors_widget(sensor_paths, thresholds)
 
         for _, sensor in ipairs(sensor_paths) do
             local handle = io.open(sensor.path, "r")
+            local value = nil
             if handle then
                 local raw_value = handle:read("*all")
                 handle:close()
-                local value = tonumber(raw_value) and tonumber(raw_value) / 1000 or nil -- Convert to Celsius
-                table.insert(sensors, { label = sensor.label, value = value })
-            else
-                table.insert(sensors, { label = sensor.label, value = nil }) -- Sensor unavailable
+                -- Convert to Celsius
+                value = tonumber(raw_value) and tonumber(raw_value) / 1000 or nil
             end
+
+            table.insert(sensors, {
+                label = sensor.label,
+                value = value,
+                thresholds = preset_thresholds[sensor.type] or preset_thresholds.DEFAULT,
+            })
         end
 
         return sensors
     end
 
     -- Function to color-code a value based on thresholds
-    local function colorize_value(value)
+    local function colorize_value(value, color)
         if not value then
             return '<span color="#888888">N/A</span>' -- Gray for unavailable sensors
         end
-
-        local color = get_color(value)
 
         -- return string.format('<span color="%s">%.1f°C</span>', color, value)
         local whole_number = math.floor(value + 0.5)
@@ -70,11 +75,12 @@ local function create_sensors_widget(sensor_paths, thresholds)
     end
 
     -- Function to format sensor data into a colorized string
-    local function format_sensor_data(sensors)
+    local function format_sensors_data(sensors)
         local formatted = {}
 
         for _, sensor in ipairs(sensors) do
-            local value_str = colorize_value(sensor.value)
+            local color = get_color(sensor.value, sensor.thresholds)
+            local value_str = colorize_value(sensor.value, color)
             table.insert(formatted, string.format("%s: %s", sensor.label, value_str))
         end
 
@@ -84,7 +90,7 @@ local function create_sensors_widget(sensor_paths, thresholds)
     -- Function to update the widget
     local function update_widget(widget)
         local sensors = get_sensor_data()
-        local formatted_text = format_sensor_data(sensors)
+        local formatted_text = format_sensors_data(sensors)
         widget:get_children_by_id("text")[1]:set_markup(formatted_text)
     end
 
