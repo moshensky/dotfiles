@@ -26,19 +26,19 @@ local modkey = RC.vars.modkey
 
 -- Custom Local Library
 local main = {
-	layouts = require("main.layouts"),
-	tags = require("main.tags"),
-	menu = require("main.menu"),
-	rules = require("main.rules"),
+    layouts = require("main.layouts"),
+    tags = require("main.tags"),
+    menu = require("main.menu"),
+    rules = require("main.rules"),
 }
 
 -- Custom Local Library: Keys and Mouse Binding
 local binding = {
-	globalbuttons = require("binding.globalbuttons"),
-	clientbuttons = require("binding.clientbuttons"),
-	globalkeys = require("binding.globalkeys"),
-	bindtotags = require("binding.bindtotags"),
-	clientkeys = require("binding.clientkeys"),
+    globalbuttons = require("binding.globalbuttons"),
+    clientbuttons = require("binding.clientbuttons"),
+    globalkeys = require("binding.globalkeys"),
+    bindtotags = require("binding.bindtotags"),
+    clientkeys = require("binding.clientkeys"),
 }
 
 -- Layouts
@@ -52,8 +52,8 @@ RC.tags = main.tags()
 RC.mainmenu = awful.menu({ items = main.menu() })
 -- Create a launcher widget and a main menu
 RC.launcher = awful.widget.launcher({
-	image = beautiful.awesome_icon,
-	menu = RC.mainmenu,
+    image = beautiful.awesome_icon,
+    menu = RC.mainmenu,
 })
 -- Menubar configuration
 menubar.utils.terminal = RC.vars.terminal -- Set the terminal for applications that require it

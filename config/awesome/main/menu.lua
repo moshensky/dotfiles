@@ -20,63 +20,63 @@ local editor = RC.vars.editor
 local editor_cmd = RC.vars.editor_cmd
 
 M.awesome = {
-	{
-		"hotkeys",
-		function()
-			hotkeys_popup.show_help(nil, awful.screen.focused())
-		end,
-	},
-	{ "manual", terminal .. " -e man awesome" },
-	{ "edit config", editor_cmd .. " " .. awesome.conffile },
-	{ "Terminal", terminal },
-	-- TODO: Checkout what is oblogout and configure someting
-	{ "Shutdown/Logout", "oblogout" },
-	{ "restart", awesome.restart },
-	{
-		"quit",
-		function()
-			awesome.quit()
-		end,
-	},
+    {
+        "hotkeys",
+        function()
+            hotkeys_popup.show_help(nil, awful.screen.focused())
+        end,
+    },
+    { "manual", terminal .. " -e man awesome" },
+    { "edit config", editor_cmd .. " " .. awesome.conffile },
+    { "Terminal", terminal },
+    -- TODO: Checkout what is oblogout and configure someting
+    { "Shutdown/Logout", "oblogout" },
+    { "restart", awesome.restart },
+    {
+        "quit",
+        function()
+            awesome.quit()
+        end,
+    },
 }
 
 -- TODO: eval apps and leave the ones I like
 M.favorite = {
-	{ "caja", "caja" },
-	{ "thunar", "thunar" },
-	{ "geany", "geany" },
-	{ "clementine", "clementine" },
-	{ "firefox", "firefox", awful.util.getdir("config") .. "/firefox.png" },
-	{ "chromium", "chromium" },
-	{ "&firefox", "firefox" },
-	{ "&thunderbird", "thunderbird" },
-	{ "libreoffice", "libreoffice" },
-	{ "transmission", "transmission-gtk" },
-	{ "gimp", "gimp" },
-	{ "inkscape", "inkscape" },
-	{ "screenshooter", "xfce4-screenshooter" },
+    { "caja", "caja" },
+    { "thunar", "thunar" },
+    { "geany", "geany" },
+    { "clementine", "clementine" },
+    { "firefox", "firefox", awful.util.getdir("config") .. "/firefox.png" },
+    { "chromium", "chromium" },
+    { "&firefox", "firefox" },
+    { "&thunderbird", "thunderbird" },
+    { "libreoffice", "libreoffice" },
+    { "transmission", "transmission-gtk" },
+    { "gimp", "gimp" },
+    { "inkscape", "inkscape" },
+    { "screenshooter", "xfce4-screenshooter" },
 }
 
 -- TODO: eval apps and leave the ones I like
 M.network_main = {
-	{ "wicd-curses", "wicd-curses" },
-	{ "wicd-gtk", "wicd-gtk" },
+    { "wicd-curses", "wicd-curses" },
+    { "wicd-gtk", "wicd-gtk" },
 }
 
 function _M.get()
-	-- Main Menu
-	local menu_items = {
-		{ "awesome", M.awesome, beautiful.awesome_subicon },
-		{ "open terminal", terminal },
-		{ "network", M.network_main },
-		{ "favorite", M.favorite },
-	}
+    -- Main Menu
+    local menu_items = {
+        { "awesome", M.awesome, beautiful.awesome_subicon },
+        { "open terminal", terminal },
+        { "network", M.network_main },
+        { "favorite", M.favorite },
+    }
 
-	return menu_items
+    return menu_items
 end
 
 return setmetatable({}, {
-	__call = function(_)
-		return _M.get()
-	end,
+    __call = function(_)
+        return _M.get()
+    end,
 })
