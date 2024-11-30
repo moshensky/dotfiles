@@ -42,15 +42,16 @@ local create_sensors_widget = require("deco.sensors_widget")
 
 -- Define sensor paths
 local sensor_paths = {
-    { type = "CPU", path = "/sys/class/hwmon/hwmon3/temp1_input", label = "CPU" },
-    { type = "GPU", path = "/sys/class/hwmon/hwmon2/temp1_input", label = "iGPU" },
+    { type = "CPU", path = "/sys/class/hwmon/hwmon5/temp1_input", label = "CPU" },
+    { type = "GPU", path = "/sys/class/hwmon/hwmon3/temp1_input", label = "GPU" },
+    { type = "GPU", path = "/sys/class/hwmon/hwmon4/temp1_input", label = "iGPU" },
     { type = "NVMe", path = "/sys/class/hwmon/hwmon1/temp1_input", label = "NVMe" },
-    { type = "MB", path = "/sys/class/hwmon/hwmon4/temp1_input", label = "System1" },
-    { type = "MB", path = "/sys/class/hwmon/hwmon4/temp2_input", label = "PCH" },
-    -- { type = "MB", path = "/sys/class/hwmon/hwmon4/temp3_input", label = "CPU2" },
-    { type = "PCIEx16", path = "/sys/class/hwmon/hwmon4/temp4_input", label = "PCIEx16" },
-    { type = "VRM", path = "/sys/class/hwmon/hwmon4/temp5_input", label = "VRM MOS" },
-    { type = "MB", path = "/sys/class/hwmon/hwmon4/temp6_input", label = "ES_TEMP1" },
+    { type = "MB", path = "/sys/class/hwmon/hwmon6/temp1_input", label = "System1" },
+    { type = "MB", path = "/sys/class/hwmon/hwmon6/temp2_input", label = "PCH" },
+    -- { type = "MB", path = "/sys/class/hwmon/hwmon6/temp3_input", label = "CPU2" },
+    { type = "PCIEx16", path = "/sys/class/hwmon/hwmon6/temp4_input", label = "PCIEx16" },
+    { type = "VRM", path = "/sys/class/hwmon/hwmon6/temp5_input", label = "VRM MOS" },
+    { type = "MB", path = "/sys/class/hwmon/hwmon6/temp6_input", label = "ES_TEMP1" },
 }
 
 local sensors_widget = create_sensors_widget(sensor_paths)
