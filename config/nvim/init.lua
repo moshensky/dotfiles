@@ -177,6 +177,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>qq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('n', '<leader>qf', vim.diagnostic.open_float, { desc = 'Open diagnostic [F]loat list' })
+vim.keymap.set('n', '<leader>qn', vim.diagnostic.goto_next, { desc = 'Diagnostic goto [N]ext' })
+vim.keymap.set('n', '<leader>qp', vim.diagnostic.goto_prev, { desc = 'Diagnostic goto [P]revious' })
 
 --  Control the size of splits (heigth/width)
 vim.keymap.set('n', '<M-h>', '<c-w>5<')
