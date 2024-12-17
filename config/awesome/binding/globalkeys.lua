@@ -159,11 +159,11 @@ function _M.get()
         -- Media
         awful.key({}, "XF86AudioRaiseVolume", function()
             awful.util.spawn("wpctl set-mute @DEFAULT_SINK@ 0")
-            awful.util.spawn("wpctl set-volume @DEFAULT_SINK@  7%+ --limit 1.0")
+            awful.util.spawn("wpctl set-volume @DEFAULT_SINK@  9%+ --limit 1.0")
         end, { description = "volume +", group = "audio" }),
         awful.key({}, "XF86AudioLowerVolume", function()
             awful.util.spawn("wpctl set-mute @DEFAULT_SINK@ 0")
-            awful.util.spawn("wpctl set-volume @DEFAULT_SINK@  7%- --limit 0")
+            awful.util.spawn("wpctl set-volume @DEFAULT_SINK@  9%- --limit 0")
         end, { description = "volume -", group = "audio" }),
         awful.key({}, "XF86AudioMute", function()
             awful.util.spawn("wpctl set-mute @DEFAULT_SINK@ toggle")
