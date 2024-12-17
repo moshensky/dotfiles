@@ -158,15 +158,15 @@ function _M.get()
 
         -- Media
         awful.key({}, "XF86AudioRaiseVolume", function()
-            awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ 0")
-            awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@  +9%")
+            awful.util.spawn("wpctl set-mute @DEFAULT_SINK@ 0")
+            awful.util.spawn("wpctl set-volume @DEFAULT_SINK@  7%+ --limit 1.0")
         end, { description = "volume +", group = "audio" }),
         awful.key({}, "XF86AudioLowerVolume", function()
-            awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ 0")
-            awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ -9%")
+            awful.util.spawn("wpctl set-mute @DEFAULT_SINK@ 0")
+            awful.util.spawn("wpctl set-volume @DEFAULT_SINK@  7%- --limit 0")
         end, { description = "volume -", group = "audio" }),
         awful.key({}, "XF86AudioMute", function()
-            awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
+            awful.util.spawn("wpctl set-mute @DEFAULT_SINK@ toggle")
         end, { description = "mute", group = "audio" }),
         awful.key({}, "XF86AudioPlay", function()
             awful.util.spawn("playerctl play-pause")
