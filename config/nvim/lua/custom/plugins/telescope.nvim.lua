@@ -53,10 +53,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --
       defaults = {
         mappings = {
-          i = {
-            -- ['<c-enter>'] = 'to_fuzzy_refine',
-            ['dd'] = actions.delete_buffer,
-          },
+          -- i = {
+          --   -- ['<c-enter>'] = 'to_fuzzy_refine',
+          --   ['dd'] = actions.delete_buffer,
+          -- },
           n = {
             ['dd'] = actions.delete_buffer,
           },
