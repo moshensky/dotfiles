@@ -238,7 +238,6 @@ return {
         'shellcheck',
         'shfmt',
         'markdownlint',
-        'cspell',
         -- 'tailwindcss-language-server',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }

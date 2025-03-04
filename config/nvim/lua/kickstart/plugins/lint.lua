@@ -6,21 +6,11 @@ return {
     config = function()
       local lint = require 'lint'
 
-      -- Change cspell severity to HINT
-      lint.linters.cspell = require('lint.util').wrap(lint.linters.cspell, function(diagnostic)
-        diagnostic.severity = vim.diagnostic.severity.HINT
-        return diagnostic
-      end)
-
       -- Configure linters
       lint.linters_by_ft = {
-        markdown = { 'markdownlint', 'cspell' },
-        bash = { 'shellcheck', 'cspell' },
-        sh = { 'shellcheck', 'cspell' },
-        rust = { 'cspell' },
-        typescriptreact = { 'cspell' },
-        typescript = { 'cspell' },
-        python = { 'cspell' },
+        markdown = { 'markdownlint' },
+        bash = { 'shellcheck' },
+        sh = { 'shellcheck' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
