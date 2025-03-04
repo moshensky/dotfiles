@@ -1,0 +1,37 @@
+# Various comments
+#
+# Set proper file type in nvim: `:set filetype=gitconfig`
+#
+# List global config: `git config --global --list --show-origin`
+#
+
+[user]
+	name = Nikita Moshenskiy
+	email = nikita@moshensky.com
+
+; [includeIf "gitdir:~/code/company/"]
+;   email = nmo@work.com
+
+[init]
+	defaultBranch = main
+
+# Automatically create new branches on the remote
+[push]
+	autoSetupRemote = true
+
+[branch]
+	sort = -committerdate
+
+[core]
+	editor = nvim
+; 	excludesfile = ~/.gitignore_global
+; 	autocrlf = input
+; 	attributesfile = ~/.gitattributes
+;
+[pull]
+	rebase = true
+
+[rebase]
+	updateRefs = true
+[alias]
+	reset-to-main = !git reset $(git merge-base main $(git branch --show-current))
