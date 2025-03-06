@@ -1,0 +1,12 @@
+pymssql
+LDFLAGS
+nvim
+APIAPP
+CPPFLAGS
+observability
+Aryeh
+venv
+pyenv
+virtualenv
+pylint
+pytest
