@@ -127,3 +127,14 @@ export VISUAL=nvim
 
 # starship has to be at the end
 eval "$(starship init bash)"
+
+# Load pyenv automatically
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+
+# Load pyenv-virtualenv automatically by adding
+eval "$(pyenv virtualenv-init -)"
+
+# Causes pip to error out if an install would not go into a virtual environment.
+export PIP_REQUIRE_VIRTUALENV=true
