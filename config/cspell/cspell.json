@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en",
+  "flagWords": [],
+  "words": [
+    "CFLAGS",
+  ],
+  "dictionaries": [
+    "global",
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "global",
+      "path": "./global.txt",
+      "description": "Global dictionary",
+      "addWords": true
+    },
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "**/node_modules",
+    "**/node_modules/**",
+    "node_modules/**",
+    "vscode-extension",
+    ".git",
+    "*.dll",
+    "**/*.dll"
+  ],
+}

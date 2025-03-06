@@ -6,11 +6,26 @@ return {
     config = function()
       local lint = require 'lint'
 
-      -- Change cspell severity to HINT
+      -- Configure cspell
       lint.linters.cspell = require('lint.util').wrap(lint.linters.cspell, function(diagnostic)
+        -- Change cspell severity to HINT
         diagnostic.severity = vim.diagnostic.severity.HINT
         return diagnostic
       end)
+      lint.linters.cspell.args = {
+        -- '--unique',
+        '--no-color',
+        '--no-progress',
+        '--no-summary',
+        '--config',
+        -- NB! keep in sync with the one in `init.lua`
+        vim.fn.expand '$HOME/.config/cspell/cspell.json',
+      }
+
+      -- local markdownlint = lint.linters.markdownlint
+      -- markdownlint.args = {
+      --   '--disable MD013 M036',
+      -- }
 
       -- Configure linters
       lint.linters_by_ft = {
@@ -22,6 +37,25 @@ return {
         typescript = { 'cspell' },
         python = { 'cspell' },
       }
+
+      -- lint.linters = {
+      --   markdownlint = {
+      --     args = {
+      --       '--disable',
+      --       'MD005',
+      --       'MD007',
+      --       'MD013',
+      --       'MD024',
+      --       'MD026',
+      --       'MD029',
+      --       'MD030',
+      --       'MD031',
+      --       'MD033',
+      --       'MD034',
+      --       '--',
+      --     },
+      --   },
+      -- }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
       -- instead set linters_by_ft like this:

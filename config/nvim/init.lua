@@ -165,7 +165,7 @@ vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 
 -- Configure spell chck
 vim.opt.spelllang = 'en_us'
-vim.opt.spell = true
+vim.opt.spell = false
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -193,6 +193,29 @@ vim.keymap.set('n', '<M-k>', '<c-W>-') -- shorter
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- cspell keymaps
+vim.api.nvim_create_user_command('CspellAddWord', function()
+  local word = vim.fn.expand '<cword>'
+  -- NB! keep in sync with the one in `lint.lua`
+  local cspell_global_dictionary = vim.fn.expand '$HOME/.config/cspell/global.txt'
+
+  local file = io.open(cspell_global_dictionary, 'a')
+  if file then
+    file:write(word .. '\n')
+    file:close()
+    vim.notify("Word '" .. word .. "' added to cspell dictionary.", vim.log.levels.INFO)
+
+    -- Re-run the linter
+    vim.cmd 'edit' -- reload the buffer
+    vim.diagnostic.reset() -- clear existing diagnostics
+    vim.cmd 'LspRestart' -- restart LSP to refresh diagnostics
+  else
+    vim.notify('Failed to open cspell dictionary file.', vim.log.levels.ERROR)
+  end
+end, {})
+
+vim.keymap.set('n', 'zg', ':CspellAddWord<CR>', { desc = 'Add word to cspell dictionary' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
