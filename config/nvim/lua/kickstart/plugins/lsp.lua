@@ -24,7 +24,7 @@ return {
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
@@ -149,14 +149,6 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
         rust_analyzer = {
           cmd = {
             'rustup',
@@ -211,6 +203,64 @@ return {
             -- },
           },
         },
+        -- Python
+        pylsp = {
+          settings = {
+            pylsp = {
+              plugins = {
+                pyflakes = { enabled = false },
+                pycodestyle = { enabled = false },
+                autopep8 = { enabled = false },
+                yapf = { enabled = false },
+                mccabe = { enabled = false },
+                pylsp_mypy = { enabled = false },
+                pylsp_black = { enabled = false },
+                pylsp_isort = { enabled = false },
+              },
+            },
+          },
+        },
+        ruff = {
+          -- Notes on code actions: https://github.com/astral-sh/ruff-lsp/issues/119#issuecomment-1595628355
+          -- Get isort like behavior: https://github.com/astral-sh/ruff/issues/8926#issuecomment-1834048218
+          commands = {
+            RuffAutofix = {
+              function()
+                vim.lsp.buf.execute_command {
+                  command = 'ruff.applyAutofix',
+                  arguments = {
+                    { uri = vim.uri_from_bufnr(0) },
+                  },
+                }
+              end,
+              description = 'Ruff: Fix all auto-fixable problems',
+            },
+            RuffOrganizeImports = {
+              function()
+                vim.lsp.buf.execute_command {
+                  command = 'ruff.applyOrganizeImports',
+                  arguments = {
+                    { uri = vim.uri_from_bufnr(0) },
+                  },
+                }
+              end,
+              description = 'Ruff: Format imports',
+            },
+          },
+        },
+
+        jsonls = {},
+        sqlls = {},
+        terraformls = {},
+        yamlls = {},
+        dockerls = {},
+        docker_compose_language_service = {},
+        -- tailwindcss = {},
+        -- graphql = {},
+        -- html = { filetypes = { 'html', 'twig', 'hbs' } },
+        -- cssls = {},
+        -- ltex = {},
+        -- texlab = {},
       }
 
       -- Ensure the servers and tools above are installed
