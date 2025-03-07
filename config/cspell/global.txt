@@ -10,3 +10,16 @@ pyenv
 virtualenv
 pylint
 pytest
+run_ankorstore
+run_stockcheck_ev
+run_stockcheck_wm
+ANKORSTORE
+STOCKCHECK_EV
+STOCKCHECK_WM
+dotenv
+jsonify
+test_tradepeg_db
+run_stockcheck
+oaknsteel
+haago
+post_tradepeg
