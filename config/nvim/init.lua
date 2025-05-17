@@ -207,9 +207,9 @@ vim.api.nvim_create_user_command('CspellAddWord', function()
     vim.notify("Word '" .. word .. "' added to cspell dictionary.", vim.log.levels.INFO)
 
     -- Re-run the linter
-    vim.cmd 'edit' -- reload the buffer
+    vim.cmd 'edit'         -- reload the buffer
     vim.diagnostic.reset() -- clear existing diagnostics
-    vim.cmd 'LspRestart' -- restart LSP to refresh diagnostics
+    vim.cmd 'LspRestart'   -- restart LSP to refresh diagnostics
   else
     vim.notify('Failed to open cspell dictionary file.', vim.log.levels.ERROR)
   end
@@ -412,7 +412,7 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- TODO: might want to delete it if I like none-ls with its config
-  -- require 'kickstart.plugins.autoformat',
+  require 'kickstart.plugins.autoformat',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.lsp',
   -- require 'kickstart.plugins.autopairs',
