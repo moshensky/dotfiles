@@ -4,7 +4,18 @@ local config = {}
 -- Appearance
 -- Ligature and other symbols preview === => != 0O $ % @ r 󰰎  
 
-config.font_size = 12
+-- Detect platform
+local target = wezterm.target_triple
+
+-- Set font size based on OS
+if target:find("darwin") then
+	config.font_size = 14.0 -- macOS
+elseif target:find("linux") then
+	config.font_size = 12.0 -- Linux
+else
+	config.font_size = 12.0 -- Fallback
+end
+
 -- See fonts in fonts.lua
 --config.font = wezterm.font 'JetBrainsMono Nerd Font'
 config.font = wezterm.font("FiraCode Nerd Font Mono")
