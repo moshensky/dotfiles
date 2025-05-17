@@ -1,6 +1,51 @@
 local wibox = require("wibox")
 local gears = require("gears")
 
+-- TODO: Update code to get values based on names and parsing the input
+--[[
+1. k10temp-pci-00c3 (AMD CPU Sensors)
+
+    Tctl: 40.6°C (CPU Temperature)
+    Tccd1: 28.8°C (Core 1 temperature)
+    Tccd2: 30.4°C (Core 2 temperature)
+
+2. amdgpu-pci-0300 (AMD GPU Sensors)
+
+    vddgfx: 201.00 mV (GPU core voltage)
+    fan1: 0 RPM (Fan speed — your fan might be idle or the sensor isn't reporting it correctly)
+    edge: 34.0°C (Edge temperature of the GPU)
+    junction: 44.0°C (Junction temperature of the GPU)
+    mem: 54.0°C (Memory temperature of the GPU)
+    PPT: 41.00 W (GPU Power consumption, with a max of 265W)
+
+3. acpitz-acpi-0 (System/ACPI Temperature)
+
+    temp1: 16.8°C (Ambient temperature)
+
+4. gigabyte_wmi-virtual-0 (Additional System Temperatures, likely from your motherboard sensors)
+
+    temp1 to temp6: These are various temperatures from different parts of your system, including components like the chipset, VRMs, or other sensors placed by your motherboard manufacturer. Here are the readings:
+        temp1: 27.0°C
+        temp2: 37.0°C
+        temp3: 40.0°C
+        temp4: 38.0°C
+        temp5: 32.0°C
+        temp6: 33.0°C
+
+5. amdgpu-pci-1200 (Additional AMD GPU Sensors)
+
+    vddgfx: 1.45 V (GPU core voltage)
+    vddnb: 1.24 V (Northbridge voltage)
+    edge: 33.0°C (Edge temperature of the GPU)
+    PPT: 39.18 W (GPU Power consumption)
+
+6. nvme-pci-0400 (NVMe SSD Sensors)
+
+    Composite: 34.9°C (Overall SSD temperature)
+    Sensor 1: 34.9°C (Sensor 1 temperature reading)
+    Sensor 2: 37.9°C (Sensor 2 temperature reading)
+]]
+
 -- Function to create the sensor widget
 local function create_sensors_widget(sensor_paths)
     -- Default thresholds by sensor type
