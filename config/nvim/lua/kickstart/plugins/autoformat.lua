@@ -32,8 +32,8 @@ return {
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      -- rust = { 'rustfmt' },
-      -- python = { 'black' },
+      rust = { 'rustfmt' },
+      -- python = { 'black' }, -- Handled by none-ls
       -- c = { 'clang_format' },
       -- bash = { 'shfmt', 'shellcheck' },
       -- zsh = { 'shfmt', 'shellcheck' },
