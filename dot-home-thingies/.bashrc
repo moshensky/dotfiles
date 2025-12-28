@@ -26,9 +26,9 @@ shopt -s checkwinsize
 
 # Chroot name for Debian (Linux only)
 if [ "$PLATFORM" = "linux" ]; then
-	if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-		debian_chroot=$(cat /etc/debian_chroot)
-	fi
+    if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+        debian_chroot=$(cat /etc/debian_chroot)
+    fi
 fi
 
 # Prompt
@@ -38,33 +38,33 @@ xterm-color | *-256color) color_prompt=yes ;;
 esac
 
 if [ -n "$force_color_prompt" ]; then
-	if command -v tput &>/dev/null && tput setaf 1 &>/dev/null; then
-		color_prompt=yes
-	else
-		color_prompt=
-	fi
+    if command -v tput &>/dev/null && tput setaf 1 &>/dev/null; then
+        color_prompt=yes
+    else
+        color_prompt=
+    fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-	PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # Set terminal title
 case "$TERM" in
 xterm* | rxvt*)
-	PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-	;;
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
 esac
 
 # Aliases and colors
 if [ "$PLATFORM" = "linux" ] && [ -x /usr/bin/dircolors ]; then
-	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-	alias ls='ls --color=auto'
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
 else
-	alias ls='ls -G' # macOS uses -G for colors
+    alias ls='ls -G' # macOS uses -G for colors
 fi
 
 alias dir='ls -la'
@@ -80,18 +80,18 @@ alias egrep='egrep --color=auto'
 
 # Load user aliases if present
 if [ -f ~/.bash_aliases ]; then
-	. ~/.bash_aliases
+    . ~/.bash_aliases
 fi
 
 # Bash completion
 if ! shopt -oq posix; then
-	if [ -f /usr/share/bash-completion/bash_completion ]; then
-		. /usr/share/bash-completion/bash_completion
-	elif [ -f /etc/bash_completion ]; then
-		. /etc/bash_completion
-	elif [ "$PLATFORM" = "macos" ]; then
-		[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-	fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    elif [ "$PLATFORM" = "macos" ]; then
+        [ -f /opt/homebrew/etc/profile.d/bash_completion.sh ] && . /opt/homebrew/etc/profile.d/bash_completion.sh
+    fi
 fi
 
 # Rust
@@ -99,11 +99,11 @@ fi
 
 # NVM
 if [ "$PLATFORM" = "linux" ]; then
-	[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
+    [ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
 elif [ "$PLATFORM" = "macos" ]; then
-	[ -s "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh"
-	# This loads nvm bash_completion
-	[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+    [ -s "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh"
+    # This loads nvm bash_completion
+    [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 fi
 
 # .NET
@@ -116,13 +116,13 @@ export VISUAL=nvim
 
 # Starship prompt
 if command -v starship &>/dev/null; then
-	eval "$(starship init bash)"
+    eval "$(starship init bash)"
 fi
 
-# Pip isolation
+# Pip isolation (require venv for installs)
 export PIP_REQUIRE_VIRTUALENV=true
 
-# SDKMAN
+# SDKMAN (must be near end for hooks)
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
