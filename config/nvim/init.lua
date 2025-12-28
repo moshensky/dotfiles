@@ -231,6 +231,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Set correct comment style for Terraform/OpenTofu files
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'terraform', 'hcl', 'tf' },
+  callback = function()
+    vim.bo.commentstring = '# %s'
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -415,6 +423,7 @@ require('lazy').setup({
   require 'kickstart.plugins.autoformat',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.lsp',
+  require 'kickstart.plugins.tools',
   -- require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
@@ -430,6 +439,7 @@ require('lazy').setup({
   -- you can continue same window with `<space>sr` which resumes last telescope search
 }, {
   ui = {
+    size = { width = 1.0, height = 1.0 },
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
     icons = vim.g.have_nerd_font and {} or {

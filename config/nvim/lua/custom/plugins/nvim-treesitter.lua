@@ -9,6 +9,7 @@ return { -- Highlight, edit, and navigate code
       'regex',
       'bash',
       'c',
+      'cpp',
       'diff',
       'html',
       'lua',

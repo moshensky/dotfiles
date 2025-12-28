@@ -20,7 +20,6 @@ return {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -125,11 +124,16 @@ return {
 
       -- Change diagnostic symbols in the sign column (gutter)
       if vim.g.have_nerd_font then
-        local signs = { Error = '', Warn = '', Hint = '', Info = '' }
-        for type, icon in pairs(signs) do
-          local hl = 'DiagnosticSign' .. type
-          vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-        end
+        vim.diagnostic.config {
+          signs = {
+            text = {
+              [vim.diagnostic.severity.ERROR] = '',
+              [vim.diagnostic.severity.WARN] = '',
+              [vim.diagnostic.severity.HINT] = '',
+              [vim.diagnostic.severity.INFO] = '',
+            },
+          },
+        }
       end
 
       -- LSP servers and clients are able to communicate to each other what features they support.
@@ -139,8 +143,7 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-      -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+      -- LSP server configs
       --
       --  Add any additional override configuration in the following tables. Available keys are:
       --  - cmd (table): Override the default command used to start the server
@@ -149,23 +152,13 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        rust_analyzer = {
-          cmd = {
-            'rustup',
-            'run',
-            'stable',
-            'rust-analyzer',
-          },
-        },
         bashls = {},
+        -- Web
         biome = {},
         ts_ls = {},
         tailwindcss = {},
-
+        -- Lua
         lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
           settings = {
             Lua = {
               runtime = {
@@ -194,13 +187,6 @@ return {
                 enable = false,
               },
             },
-            -- Lua = {
-            --   completion = {
-            --     callSnippet = 'Replace',
-            --   },
-            --   -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            --   -- diagnostics = { disable = { 'missing-fields' } },
-            -- },
           },
         },
         -- Python
@@ -220,55 +206,38 @@ return {
             },
           },
         },
-        ruff = {
-          -- Notes on code actions: https://github.com/astral-sh/ruff-lsp/issues/119#issuecomment-1595628355
-          -- Get isort like behavior: https://github.com/astral-sh/ruff/issues/8926#issuecomment-1834048218
-          commands = {
-            RuffAutofix = {
-              function()
-                vim.lsp.buf.execute_command {
-                  command = 'ruff.applyAutofix',
-                  arguments = {
-                    { uri = vim.uri_from_bufnr(0) },
-                  },
-                }
-              end,
-              description = 'Ruff: Fix all auto-fixable problems',
-            },
-            RuffOrganizeImports = {
-              function()
-                vim.lsp.buf.execute_command {
-                  command = 'ruff.applyOrganizeImports',
-                  arguments = {
-                    { uri = vim.uri_from_bufnr(0) },
-                  },
-                }
-              end,
-              description = 'Ruff: Format imports',
-            },
+        ruff = {},
+
+        -- C/C++
+        clangd = {
+          cmd = {
+            'clangd',
+            '--background-index',
+            '--clang-tidy',
+            '--header-insertion=iwyu',
+            '--completion-style=detailed',
+            '--function-arg-placeholders',
+          },
+          init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
           },
         },
 
+        -- Data/DB
         jsonls = {},
         sqlls = {},
+        postgres_lsp = {},
+
+        -- Infra
         terraformls = {},
         yamlls = {},
         dockerls = {},
         docker_compose_language_service = {},
-        -- tailwindcss = {},
-        -- graphql = {},
-        -- html = { filetypes = { 'html', 'twig', 'hbs' } },
-        -- cssls = {},
-        -- ltex = {},
-        -- texlab = {},
       }
 
-      -- Ensure the servers and tools above are installed
-      --  To check the current status of installed tools and/or manually install
-      --  other tools, you can run
-      --    :Mason
-      --
-      --  You can press `g?` for help in this menu.
+      -- Mason setup
       require('mason').setup {
         ui = {
           icons = {
@@ -276,35 +245,66 @@ return {
             package_pending = '➜',
             package_uninstalled = '✗',
           },
+          width = 1.0,
+          height = 1.0,
         },
       }
 
-      -- You can add other tools here that you want Mason to install
-      -- for you, so that they are available from within Neovim.
+      local function setup_server(server_name, server)
+        -- Merge default capabilities (incl. nvim-cmp) with any per-server overrides.
+        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+        vim.lsp.config(server_name, server)
+        vim.lsp.enable(server_name)
+      end
+
       local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        -- Used to format Lua code
-        'stylua',
-        'shellcheck',
-        'shfmt',
-        'markdownlint',
-        'cspell',
-        -- 'tailwindcss-language-server',
-      })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
+        ensure_installed = ensure_installed,
+        automatic_enable = true,
         handlers = {
           function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            local config = assert(servers[server_name], 'Missing LSP config: ' .. server_name)
+            setup_server(server_name, config)
           end,
         },
       }
+
+
+      -- Manually setup rust_analyzer with rustup
+      local rust_analyzer_config = {
+        cmd = {
+          'rustup',
+          'run',
+          'stable',
+          'rust-analyzer',
+        },
+        settings = {
+          ['rust-analyzer'] = {
+            procMacro = {
+              enable = true,
+              attributes = {
+                enable = true,
+              },
+            },
+            cargo = {
+              buildScripts = {
+                enable = true,
+              },
+              features = 'all',
+            },
+            check = {
+              command = 'clippy',
+            },
+            diagnostics = {
+              experimental = {
+                enable = true,
+              },
+            },
+          },
+        },
+      }
+      setup_server('rust_analyzer', rust_analyzer_config)
     end,
   },
 }
