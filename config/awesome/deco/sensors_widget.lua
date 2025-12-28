@@ -50,22 +50,24 @@ local gears = require("gears")
 local function create_sensors_widget(sensor_paths)
     -- Default thresholds by sensor type
     local preset_thresholds = {
-        MB = { cool = 45, normal = 60, high = 75, critycal = 100 },
-        VRM = { cool = 45, normal = 70, high = 80, critycal = 100 },
-        PCIEx16 = { cool = 50, normal = 80, high = 90, critycal = 100 },
-        GPU = { cool = 40, normal = 70, high = 85, critycal = 100 },
-        CPU = { cool = 50, normal = 75, high = 95, critycal = 105 },
-        NVMe = { cool = 41, normal = 71, high = 85, critycal = 95 },
-        DEFAULT = { cool = 35, normal = 65, hight = 85, critycal = 95 },
+        MB = { cool = 45, normal = 60, high = 75, critical = 100 },
+        VRM = { cool = 45, normal = 70, high = 80, critical = 100 },
+        PCIEx16 = { cool = 50, normal = 80, high = 90, critical = 100 },
+        GPU = { cool = 40, normal = 70, high = 85, critical = 100 },
+        CPU = { cool = 50, normal = 75, high = 95, critical = 105 },
+        NVMe = { cool = 41, normal = 71, high = 85, critical = 95 },
+        DEFAULT = { cool = 35, normal = 65, high = 85, critical = 95 },
     }
 
     -- Function to determine color based on temperature
     local function get_color(temp, thresholds)
-        if temp < thresholds.cool then
+        if not temp then
+            return "#888888" -- Gray if no value
+        elseif temp < thresholds.cool then
             return "#ffffff" -- White
         elseif temp < thresholds.normal then
             return "#00FF00" -- Green
-        elseif temp < thresholds.hight then
+        elseif temp < thresholds.high then
             return "#FFA500" -- Orange
         else
             return "#FF0000" -- Red
@@ -89,8 +91,8 @@ local function create_sensors_widget(sensor_paths)
         local sensors = {}
 
         for _, sensor in ipairs(sensor_paths) do
-            local handle = io.open(sensor.path, "r")
             local value = nil
+            local handle = io.open(sensor.path, "r")
             if handle then
                 local raw_value = handle:read("*all")
                 handle:close()
@@ -111,10 +113,8 @@ local function create_sensors_widget(sensor_paths)
     -- Function to color-code a value based on thresholds
     local function colorize_value(value, color)
         if not value then
-            return '<span color="#888888">N/A</span>' -- Gray for unavailable sensors
+            return '<span color="#888888">N/A</span>'
         end
-
-        -- return string.format('<span color="%s">%.1f°C</span>', color, value)
         local whole_number = math.floor(value + 0.5)
         return string.format('<span color="%s">%d°C</span>', color, whole_number)
     end
@@ -122,14 +122,12 @@ local function create_sensors_widget(sensor_paths)
     -- Function to format sensor data into a colorized string
     local function format_sensors_data(sensors)
         local formatted = {}
-
         for _, sensor in ipairs(sensors) do
             local color = get_color(sensor.value, sensor.thresholds)
             local value_str = colorize_value(sensor.value, color)
             table.insert(formatted, string.format("%s: %s", sensor.label, value_str))
         end
-
-        return table.concat(formatted, "|") -- Join with spaces for separation
+        return table.concat(formatted, " | ")
     end
 
     -- Function to update the widget
