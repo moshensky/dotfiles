@@ -22,10 +22,12 @@ return {
         vim.fn.expand '$HOME/.config/cspell/cspell.json',
       }
 
-      -- local markdownlint = lint.linters.markdownlint
-      -- markdownlint.args = {
-      --   '--disable MD013 M036',
-      -- }
+      local markdownlint = lint.linters.markdownlint
+      markdownlint.args = {
+        '--disable',
+        'MD013',
+        -- 'MD036',
+      }
 
       -- Configure linters
       lint.linters_by_ft = {
