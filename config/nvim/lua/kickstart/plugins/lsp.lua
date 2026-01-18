@@ -224,6 +224,8 @@ return {
             clangdFileStatus = true,
           },
         },
+        -- C#
+        omnisharp = {},
 
         -- Data/DB
         jsonls = {},
