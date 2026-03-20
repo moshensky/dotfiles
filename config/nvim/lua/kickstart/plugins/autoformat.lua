@@ -31,8 +31,6 @@ return {
       }
     end,
     formatters_by_ft = {
-      html = { 'prettier' },
-      markdown = { 'prettier' },
       -- bash = { 'shfmt', 'shellcheck' },
       -- zsh = { 'shfmt', 'shellcheck' },
       sh = { 'shfmt' },

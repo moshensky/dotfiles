@@ -35,8 +35,13 @@ return {
         bash = { 'shellcheck', 'cspell' },
         sh = { 'shellcheck', 'cspell' },
         rust = { 'cspell' },
+        javascript = { 'cspell' },
+        javascriptreact = { 'cspell' },
         typescriptreact = { 'cspell' },
         typescript = { 'cspell' },
+        json = { 'cspell' },
+        jsonc = { 'cspell' },
+        yaml = { 'cspell' },
         python = { 'cspell' },
       }
 

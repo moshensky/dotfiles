@@ -154,7 +154,8 @@ return {
       local servers = {
         bashls = {},
         -- Web
-        biome = {},
+        oxfmt = {},
+        oxlint = {},
         ts_ls = {},
         tailwindcss = {},
         -- Lua
