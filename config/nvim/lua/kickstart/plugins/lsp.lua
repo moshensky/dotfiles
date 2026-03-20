@@ -154,6 +154,7 @@ return {
       local servers = {
         bashls = {},
         -- Web
+        oxfmt = {},
         oxlint = {},
         ts_ls = {},
         tailwindcss = {},
@@ -305,24 +306,6 @@ return {
         },
       }
       setup_server('rust_analyzer', rust_analyzer_config)
-
-      -- Manually setup oxfmt (not yet in nvim-lspconfig)
-      setup_server('oxfmt', {
-        cmd = { 'oxfmt', '--lsp' },
-        filetypes = {
-          'javascript',
-          'javascriptreact',
-          'typescript',
-          'typescriptreact',
-          'json',
-          'jsonc',
-          'yaml',
-          'html',
-          'css',
-          'markdown',
-        },
-        root_markers = { '.git' },
-      })
     end,
   },
 }
