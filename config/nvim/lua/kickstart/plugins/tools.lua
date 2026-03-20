@@ -6,7 +6,6 @@ return {
       ensure_installed = {
         'shellcheck',
         'shfmt',
-        'prettier',
         'markdownlint',
         'cspell',
       },
