@@ -128,3 +128,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # Python tools (e.g. uv)
 export PATH="$HOME/.local/bin:$PATH"
+
+# Used for subprocesses that spawn `pass` cmd
+export GPG_TTY=$(tty)
