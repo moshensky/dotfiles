@@ -131,3 +131,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Used for subprocesses that spawn `pass` cmd
 export GPG_TTY=$(tty)
+
+# The autocomplete
+eval "$(ops completions bash)"
