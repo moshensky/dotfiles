@@ -68,3 +68,16 @@ for config in $dot_home_files; do
     echo "[INFO] Symlink config: $config"
     backup_and_link --source "$root_dir/dot-home-thingies/$config" --target "$HOME/$config"
 done
+
+# -- Link individual Claude Code config items
+#
+# ~/.claude is a live directory full of machine-local state (caches, session
+# transcripts, history), so only the portable config items are symlinked in
+# rather than the whole directory.
+
+mkdir -p "$HOME/.claude"
+
+for item in settings.json agents hooks; do
+    echo "[INFO] Symlink claude: $item"
+    backup_and_link --source "$root_dir/claude/$item" --target "$HOME/.claude/$item"
+done

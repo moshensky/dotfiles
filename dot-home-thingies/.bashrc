@@ -134,3 +134,5 @@ export GPG_TTY=$(tty)
 
 # The autocomplete
 eval "$(ops completions bash)"
+
+eval "$(direnv hook bash)"

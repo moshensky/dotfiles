@@ -1,1 +1,5 @@
 config/tmux/plugins
+
+# Backups created by scripts/symlink.sh (keep the dir + its README only)
+backup/*
+!backup/README.md
