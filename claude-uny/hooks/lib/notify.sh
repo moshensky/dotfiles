@@ -13,7 +13,7 @@
 #   TMUX_PANE="$(tmux display -p '#{pane_id}')" send_notification "Finished" "clickable test" "Glass"
 
 FOCUS_SCRIPT="$HOME/.claude-uny/hooks/focus-tmux-pane.sh"
-NOTIFY_TITLE="Claude Code"
+NOTIFY_TITLE="Claude Code [uny]"
 WEZTERM_BUNDLE_ID="com.github.wez.wezterm"
 
 send_notification() {
