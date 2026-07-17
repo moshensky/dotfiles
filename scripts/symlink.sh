@@ -42,8 +42,10 @@ backup_and_link() {
         echo "    Backup of '$target' created at '$backup'"
     fi
 
-    # Force-create the symlink
-    ln -sf "$source" "$target"
+    # Force-create the symlink. -n (aka -h) stops ln from dereferencing an
+    # existing symlink-to-directory at $target; without it, a re-run descends
+    # into the linked dir and drops a recursive symlink inside $source.
+    ln -sfn "$source" "$target"
     # Prevent recursion
     if [[ -d "$source" && "$source/$target_basename" == "$target" ]]; then
         rm -f "$source/$target_basename"
