@@ -81,3 +81,16 @@ for item in settings.json agents hooks; do
     echo "[INFO] Symlink claude: $item"
     backup_and_link --source "$root_dir/claude/$item" --target "$HOME/.claude/$item"
 done
+
+# -- Link the parallel ~/.claude-uny profile
+#
+# A separate profile with its own hooks source (claude-uny/), independent of
+# claude/ so the two can diverge. Only hooks are managed here; ~/.claude-uny's
+# own settings.json and agents are left as machine-local state.
+
+mkdir -p "$HOME/.claude-uny"
+
+for item in hooks; do
+    echo "[INFO] Symlink claude-uny: $item"
+    backup_and_link --source "$root_dir/claude-uny/$item" --target "$HOME/.claude-uny/$item"
+done
