@@ -136,3 +136,7 @@ export GPG_TTY=$(tty)
 eval "$(ops completions bash)"
 
 eval "$(direnv hook bash)"
+
+eval "$(snapvrt completions bash)"
+eval "$(ops completions bash)"
+eval "$(snapvrt completions bash)"

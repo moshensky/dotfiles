@@ -25,6 +25,7 @@
   },
   "effortLevel": "medium",
   "skipWorkflowUsageWarning": true,
+  "agentPushNotifEnabled": true,
   "voiceEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754065216965
